@@ -1,0 +1,109 @@
+< error와 message 목록 >
+errno : 0	message : Success
+errno : 1	message : Operation not permitted
+errno : 2	message : No such file or directory
+errno : 3	message : No such process
+errno : 4	message : Interrupted system call
+errno : 5	message : Input/output error
+errno : 6	message : No such device or address
+errno : 7	message : Argument list too long
+errno : 8	message : Exec format error
+errno : 9	message : Bad file descriptor
+errno : 10	message : No child processes
+errno : 11	message : Resource temporarily unavailable
+errno : 12	message : Cannot allocate memory
+errno : 13	message : Permission denied
+errno : 14	message : Bad address
+errno : 15	message : Block device required
+errno : 16	message : Device or resource busy
+errno : 17	message : File exists
+errno : 18	message : Invalid cross-device link
+errno : 19	message : No such device
+errno : 20	message : Not a directory
+errno : 21	message : Is a directory
+errno : 22	message : Invalid argument
+errno : 23	message : Too many open files in system
+errno : 24	message : Too many open files
+errno : 25	message : Inappropriate ioctl for device
+errno : 26	message : Text file busy
+errno : 27	message : File too large
+errno : 28	message : No space left on device
+errno : 29	message : Illegal seek
+errno : 30	message : Read-only file system
+errno : 31	message : Too many links
+errno : 32	message : Broken pipe
+errno : 33	message : Numerical argument out of domain
+errno : 34	message : Numerical result out of range
+errno : 35	message : Resource deadlock avoided
+errno : 36	message : File name too long
+errno : 37	message : No locks available
+errno : 38	message : Function not implemented
+errno : 39	message : Directory not empty
+errno : 40	message : Too many levels of symbolic links
+errno : 41	message : Unknown error 41
+errno : 42	message : No message of desired type
+errno : 43	message : Identifier removed
+errno : 44	message : Channel number out of range
+errno : 45	message : Level 2 not synchronized
+errno : 46	message : Level 3 halted
+errno : 47	message : Level 3 reset
+errno : 48	message : Link number out of range
+errno : 49	message : Protocol driver not attached
+errno : 50	message : No CSI structure available
+errno : 51	message : Level 2 halted
+errno : 52	message : Invalid exchange
+errno : 53	message : Invalid request descriptor
+errno : 54	message : Exchange full
+errno : 55	message : No anode
+errno : 56	message : Invalid request code
+errno : 57	message : Invalid slot
+errno : 58	message : Unknown error 58
+errno : 59	message : Bad font file format
+errno : 60	message : Device not a stream
+errno : 61	message : No data available
+errno : 62	message : Timer expired
+errno : 63	message : Out of streams resources
+errno : 64	message : Machine is not on the network
+errno : 65	message : Package not installed
+errno : 66	message : Object is remote
+errno : 67	message : Link has been severed
+errno : 68	message : Advertise error
+errno : 69	message : Srmount error
+errno : 70	message : Communication error on send
+errno : 71	message : Protocol error
+errno : 72	message : Multihop attempted
+errno : 73	message : RFS specific error
+errno : 74	message : Bad message
+errno : 75	message : Value too large for defined data type
+errno : 76	message : Name not unique on network
+errno : 77	message : File descriptor in bad state
+errno : 78	message : Remote address changed
+errno : 79	message : Can not access a needed shared library
+errno : 80	message : Accessing a corrupted shared library
+errno : 81	message : .lib section in a.out corrupted
+errno : 82	message : Attempting to link in too many shared libraries
+errno : 83	message : Cannot exec a shared library directly
+errno : 84	message : Invalid or incomplete multibyte or wide character
+errno : 85	message : Interrupted system call should be restarted
+errno : 86	message : Streams pipe error
+errno : 87	message : Too many users
+errno : 88	message : Socket operation on non-socket
+errno : 89	message : Destination address required
+errno : 90	message : Message too long
+errno : 91	message : Protocol wrong type for socket
+errno : 92	message : Protocol not available
+errno : 93	message : Protocol not supported
+errno : 94	message : Socket type not supported
+errno : 95	message : Operation not supported
+errno : 96	message : Protocol family not supported
+errno : 97	message : Address family not supported by protocol
+errno : 98	message : Address already in use
+errno : 99	message : Cannot assign requested address
+errno : 100	message : Network is down
+errno : 101	message : Network is unreachable
+errno : 102	message : Network dropped connection on reset
+errno : 103	message : Software caused connection abort
+errno : 104	message : Connection reset by peer
+errno : 105	message : No buffer space available
+errno : 106	message : Transport endpoint is already connected
+errno : 107	message : Transport endpoint is not connected
