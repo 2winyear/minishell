@@ -12,7 +12,7 @@ char    *read_line(void)
     char    *str;
 
     rl_bind_key(SIGILL, my_bind_esc);   // 처리할 키(Ctrl+D) 바인딩
-    str = readline("> ");   // 라인 읽어오기
+    str = readline("👍 ");   // 라인 읽어오기
     if (str)                // 공백 처리되면 NULL반환
     {
         if (strlen(str))

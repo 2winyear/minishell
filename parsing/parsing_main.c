@@ -13,22 +13,24 @@ int	is_seperate(char *line, char **seperate)
 	return (-1);
 }
 
-int	save_command(deque *cmd, char *command, char *seperate, int len)
+int	save_command(t_deque *cmd, char *command, char *seperate, int len)
 {
 	char		*temp;
+	char		**split_cmd;
 	char		*temp_spr;
-	deque_node	*new_node;
+	t_deque_node	*new_node;
 
 	temp = ft_strndup(command, len);
 	if (!temp)
 		return (0);
-	temp_spr = ft_strdup(seperate);
-	new_node = make_deque_node(temp, temp_spr);
-	if (!new_node)
-	{
-		free(temp);
+	split_cmd = ft_split(temp, ' ');
+	free(temp);
+	if (!split_cmd)
 		return (0);
-	}
+	temp_spr = ft_strdup(seperate);
+	new_node = make_deque_node(split_cmd, temp_spr);
+	if (!new_node)
+		return (0);
 	push_deque(cmd, new_node);
 	return (1);
 }
@@ -46,7 +48,7 @@ int is_double_quote(char word)
 	return (0);
 }
 
-int	tokenizing(deque *cmd, char *command)
+int	tokenizing(t_deque *cmd, char *command)
 {
 	int		start;
 	int		end;
@@ -73,9 +75,9 @@ int	tokenizing(deque *cmd, char *command)
     return (1);
 }
 
-deque	*parsing(char *command)
+t_deque	*parsing(char *command)
 {
-	deque	*cmd;
+	t_deque	*cmd;
 
 	cmd = make_deque();
 	if (!cmd)

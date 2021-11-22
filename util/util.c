@@ -49,9 +49,25 @@ int     ft_nbrlen(int num)
     return (len);
 }
 
+int		ft_strcmp(char *str1, char *str2)
+{
+	int	idx;
+
+	idx = 0;
+	while (str1[idx] && str2[idx])
+	{
+		if (str1[idx] != str2[idx])
+			return (str1[idx] - str2[idx]);
+		idx++;
+	}
+	if (str1[idx] || str2[idx])
+		return (str1[idx] - str2[idx]);
+	return (0);
+}
+
 int     ft_strncmp(char *str1, char *str2, int n)
 {
-    int idx;
+    int	idx;
 
     idx = -1;
     while (++idx < n && str1[idx] && str2[idx])
@@ -130,4 +146,52 @@ char    *ft_strndup(char *s1, int len)
         s2[idx] = s1[idx];
     s2[idx] = '\0';
     return(s2);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char*)s1;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	i = -1;
+	j = -1;
+	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (s1[++i] != 0)
+		str[i] = s1[i];
+	while (s2[++j] != 0)
+		str[i++] = s2[j];
+	str[i] = 0;
+	return (str);
+}
+
+char	*ft_strjointri(char *str1, char *str2, char *str3)
+{
+	char	*str;
+	int		len;
+	int		i;
+	int		j;
+	int		k;
+
+	len = ft_strlen(str1) + ft_strlen(str2) + ft_strlen(str3);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = -1;
+	k = -1;
+	while (str1[++i])
+		str[i] = str1[i];
+	while (str2[++j])
+		str[i++] = str2[j];
+	while (str3[++k])
+		str[i++] = str3[k];
+	str[i] = '\0';
+	return (str);
 }

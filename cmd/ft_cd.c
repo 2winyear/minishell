@@ -167,7 +167,3 @@ open된 Directory정보를 close
 int chdir(const char *path);
 경로를 바꾸는데에 사용된다.
 */
-
-
-// return
-

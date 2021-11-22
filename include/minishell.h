@@ -26,17 +26,24 @@
 #define FALSE 0
 #define TRUE 1
 #define ERROR -1
-#define CURSE_POS "\033[6n"
-#define EOF_CMD 4
-#define BACKSPACE 127
+
+typedef struct s_infomation
+{
+	char		**env;
+	char		*pwd;
+	int			env_size;
+	t_deque		*cmd;
+	int			is_pipe;
+	int			is_prev_pipe;
+} t_info;
 
 ///////////////parsing/////////////
 char            **ft_split(char const *s, char c);
 int				is_seperate(char *line, char **seperate);
-int				save_command(deque *cmd, char *command, char *seperate, int len);
+int				save_command(t_deque *cmd, char *command, char *seperate, int len);
 int				is_double_quote(char word);
-int				tokenizing(deque *cmd, char *command);
-deque			*parsing(char *command);
+int				tokenizing(t_deque *cmd, char *command);
+t_deque			*parsing(char *command);
 
 
 ///////////////signal//////////////
@@ -50,24 +57,35 @@ char            *read_line(void);
 
 ///////////////init////////////////
 void            display_logo(void);
+void			*free_info(t_info *info);
+t_info			*init_info(char **env);
 
-///////////////env_util////////////
+///////////////bin_path////////////
+char			*make_bin_path(char **env, char *cmd);
 
 ///////////////util////////////////
 int             ft_isdigit(int c);
 int             ft_strlen(char *str);
 int             ft_atoi(char *str);
 int             ft_nbrlen(int num);
+int				ft_strcmp(char *str1, char *str2);
 int             ft_strncmp(char *str1, char *str2, int n);
 char            *ft_strncpy(char *line, int n);
 char	        *ft_strnstr(const char *b, const char *l, size_t len);
 char	        *ft_strdup(char *s1);
 char            *ft_strndup(char *s1, int len);
+char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjointri(char *str1, char *str2, char *str3);
+
+//////////////pipe_func////////////
+int				check_run_builtin(char **command, t_info *info);
+void			act_child(t_deque_node *node, t_info *info);
+void			operate_pipe(t_info *info, t_deque_node *node, int flag);
+void			check_seperate(t_info *info, t_deque_node *temp_node);
 
 //////////////minishell////////////
-//char            *execute(command_node *command);
-//int             interpret(command_node *commands);
-void            inf_loop(void);
+int				execute(t_info *info);
+void            inf_loop(t_info *info);
 
 #endif
 // 컴파일할때 뒤에 -lreadline
