@@ -43,3 +43,8 @@ int main(int argc, char **argv)
         ft_echo(command);
     return(0);
 }
+
+/*
+0	Successful completion.
+>0	An error occurred.
+*/

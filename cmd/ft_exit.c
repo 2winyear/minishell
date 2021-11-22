@@ -51,3 +51,7 @@ int main(void)
     }
     return (0);
 }*/
+
+/*
+exit() 함수는 오퍼레이팅 시스템에 status 값과 제어를 둘 다 리턴합니다.
+*/
