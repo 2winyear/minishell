@@ -78,7 +78,7 @@ char			*ft_strjointri(char *str1, char *str2, char *str3);
 //////////////env_util/////////////
 void			*free_matrix(char ***env);
 char			**env_dup(char **env, int flag, char *app_str);
-char			*find_bin_path(char *env);
+char			**find_bin_path(char **env);
 char			*make_bin_path(char **env, char *cmd);
 
 //////////////pipe_func////////////
