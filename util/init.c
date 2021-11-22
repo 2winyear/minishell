@@ -1,47 +1,46 @@
 #include "../include/minishell.h"
 
-void    display_logo(void)
+void	display_logo(void)
 {
-    int     fd;
-    int     bytes;
-    char    buf[1025];
+	int		fd;
+	int		bytes;
+	char	buf[BUF_SIZE];
 
-    // /Users/{USER_NAME}/Downloads/minishell/minishell/util/front_logo
-    fd = open("/Users/byeukim/Downloads/minishell/util/front_logo",O_RDONLY);
-    if (fd < 0)
-        return ;
-    bytes = read(fd, buf, 1024);
-    buf[bytes] = '\0';
-    if (bytes == -1)
-    {
-        close(fd);
-        return ;
-    }
-    printf("%s", buf);
-    close(fd);
+	fd = open("/Users/byeukim/Downloads/minishell/util/front_logo", O_RDONLY);
+	if (fd < 0)
+		return ;
+	bytes = read(fd, buf, BUF_SIZE - 1);
+	buf[bytes] = '\0';
+	if (bytes == -1)
+	{
+		close(fd);
+		return ;
+	}
+	printf("%s", buf);
+	close(fd);
 }
 
-void	*free_info(t_info *info)
+void	*free_info(t_info **info)
 {
 	int	idx;
 
 	idx = -1;
-	if (info->cmd)
-		delete_deque(&(info->cmd));
-	if (info->env)
+	if ((*info)->cmd)
+		delete_deque(&((*info)->cmd));
+	if ((*info)->env)
 	{
-		while (info->env[++idx])
+		while ((*info)->env[++idx])
 		{
-			free(info->env[idx]);
-			info->env[idx] = NULL;
+			free((*info)->env[idx]);
+			(*info)->env[idx] = NULL;
 		}
-		free(info->env);
-		info->env = NULL;
+		free((*info)->env);
+		(*info)->env = NULL;
 	}
-	if (info->pwd)
-		free(info->pwd);
-	free(info);
-	info = NULL;
+	if ((*info)->pwd)
+		free((*info)->pwd);
+	free(*info);
+	*info = NULL;
 	return (NULL);
 }
 
@@ -49,18 +48,13 @@ t_info	*init_info(char **env)
 {
 	t_info	*info;
 	int		idx;
-	int		i;
 
 	info = malloc(sizeof(t_info));
 	if (!info)
 		return (NULL);
-	for (i=0; env[i]; i++)
-		;
-	info->env = malloc(sizeof(char*) * i);
-	for (i = 0; env[i]; i++)
-		info->env[i] = ft_strdup(env[i]);
-	info->env[i] = 0;
-//	info->env = env;
+	info->env = env_dup(env, 0, NULL);
+	if (!info->env)
+		return (free_info(&info));
 	idx = -1;
 	while (env[++idx])
 	{
@@ -68,10 +62,10 @@ t_info	*init_info(char **env)
 		{
 			info->pwd = ft_strdup(env[idx] + 4);
 			if (!info->pwd)
-				return (free_info(info));
+				return (free_info(&info));
 		}
 		if (!info->env[idx])
-			return (free_info(info));
+			return (free_info(&info));
 	}
 	info->env_size = idx;
 	info->is_pipe = 0;

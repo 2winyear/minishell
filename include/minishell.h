@@ -26,6 +26,7 @@
 #define FALSE 0
 #define TRUE 1
 #define ERROR -1
+#define BUF_SIZE 1025
 
 typedef struct s_infomation
 {
@@ -57,11 +58,8 @@ char            *read_line(void);
 
 ///////////////init////////////////
 void            display_logo(void);
-void			*free_info(t_info *info);
+void			*free_info(t_info **info);
 t_info			*init_info(char **env);
-
-///////////////bin_path////////////
-char			*make_bin_path(char **env, char *cmd);
 
 ///////////////util////////////////
 int             ft_isdigit(int c);
@@ -76,6 +74,12 @@ char	        *ft_strdup(char *s1);
 char            *ft_strndup(char *s1, int len);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjointri(char *str1, char *str2, char *str3);
+
+//////////////env_util/////////////
+void			*free_matrix(char ***env);
+char			**env_dup(char **env, int flag, char *app_str);
+char			*find_bin_path(char *env);
+char			*make_bin_path(char **env, char *cmd);
 
 //////////////pipe_func////////////
 int				check_run_builtin(char **command, t_info *info);

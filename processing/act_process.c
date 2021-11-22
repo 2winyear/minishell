@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		check_run_builtin(char **command, t_info *info)
+int	check_run_builtin(char **command, t_info *info)
 {
 	if (!ft_strcmp(command[0], "export"))
 	{

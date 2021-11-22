@@ -1,14 +1,14 @@
 #include "../include/minishell.h"
 
-void    sig_handler(int signum)
+void	sig_handler(int signum)
 {
-    if (signum == SIGINT)   // Ctrl+C 처리
-        exit(130);
-    return;
+	if (signum == SIGINT)
+		exit(SIGINT);
+	return ;
 }
 
-void    init_signal(void)
+void	init_signal(void)
 {
-    signal(SIGINT, (void*)sig_handler); // Ctrl+C 처리
-    signal(SIGQUIT, SIG_IGN);           // Ctrl+'\' 무시
+	signal(SIGINT, (void *)sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
