@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		find_cmd(char *env, char *command)
+int	find_cmd(char *env, char *command)
 {
 	int	equ;
 
@@ -38,14 +38,13 @@ char	**ft_unset(char *command, t_info *info)
 	return (edit_env);
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	char *command = "TEST1";
-	t_info *info;
-	int i;
+	char	*command = "TEST1";
+	t_info	*info;
+	int		i;
 
 	i = 0;
-	
 	info = init_info(env);
 	for (int i = 0; info->env[i]; i++)
 		printf("before : %s\n", info->env[i]);

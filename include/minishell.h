@@ -32,6 +32,9 @@ typedef struct s_infomation
 {
 	char		**env;
 	char		*pwd;
+	char		*curr_pwd;
+	char		**curr_pwd_split;
+	char		**command_split;
 	int			env_size;
 	t_deque		*cmd;
 	int			is_pipe;
