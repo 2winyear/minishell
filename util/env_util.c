@@ -37,11 +37,6 @@ char	**env_dup(char **env, int flag, char *app_str)
 			return (free_matrix(&edit_env));
 	}
 	edit_env[idx] = NULL;
-	for (int i = 0; env[i]; i++)
-	{
-		printf("env : %s\n", env[i]);
-		printf("inv : %s\n", edit_env[i]);
-	}
 	return (edit_env);
 }
 
@@ -60,13 +55,12 @@ char	**find_bin_path(char **env)
 	return (bin_path);
 }
 
-char	*make_bin_path(char **env, char *cmd)
+char	*make_bin_path(char **env, char *cmd, char **path)
 {
 	DIR				*dir;
 	struct dirent	*ent;
 	int				idx;
 	char			**bin_path;
-	char			*path;
 
 	bin_path = find_bin_path(env);
 	idx = -1;
@@ -80,9 +74,8 @@ char	*make_bin_path(char **env, char *cmd)
 		{
 			if (!ft_strcmp(ent->d_name, cmd))
 			{
-				path = ft_strjointri(bin_path[idx], "/", cmd);
-				free_matrix(&bin_path);
-				return (path);
+				*path = ft_strjointri(bin_path[idx], "/", cmd);
+				return (free_matrix(&bin_path));
 			}
 			ent = readdir(dir);
 		}

@@ -12,12 +12,12 @@ t_deque	*make_deque(void)
 	cmd->tailer_node.prev_node = &(cmd->header_node);
 	cmd->tailer_node.next_node = NULL;
 	cmd->current_element_count = 0;
-	cmd->seperates = ft_split("|,<<,>>,<,>,;",',');
+	cmd->seperates = ft_split("|,<<,>>,<,>,;", ',');
 	cmd->seperate_len = 5;
 	return (cmd);
 }
 
-t_deque_node	*make_deque_node(char **command, char* seperate)
+t_deque_node	*make_deque_node(char **command, char *seperate)
 {
 	t_deque_node	*new_node;
 

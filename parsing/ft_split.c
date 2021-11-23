@@ -1,9 +1,9 @@
 #include "../include/minishell.h"
 
-static int		ft_count(char const *s, char c)
+static int	ft_count(char const *s, char c)
 {
-	int i;
-	int cnt;
+	int	i;
+	int	cnt;
 
 	i = -1;
 	cnt = 0;
@@ -22,7 +22,7 @@ static int		ft_count(char const *s, char c)
 	return (cnt);
 }
 
-static char		*ft_insert_str(char *s, char c, char *str, int idx)
+static char	*ft_insert_str(char *s, char c, char *str, int idx)
 {
 	int		i;
 	int		j;
@@ -34,14 +34,16 @@ static char		*ft_insert_str(char *s, char c, char *str, int idx)
 	s += idx;
 	if (!s[i])
 	{
-		if (!(str = (char*)malloc(sizeof(char) * 1)))
+		str = (char *)malloc(sizeof(char) * 1);
+		if (!str)
 			return (NULL);
 		str[j] = 0;
 		return (str);
 	}
 	while (s[k] != c && s[k] != 0)
 		k++;
-	if (!(str = (char*)malloc(sizeof(char) * (k + 1))))
+	str = (char *)malloc(sizeof(char) * (k + 1));
+	if (!str)
 		return (NULL);
 	while (j < k)
 		str[j++] = *s++;
@@ -49,9 +51,9 @@ static char		*ft_insert_str(char *s, char c, char *str, int idx)
 	return (str);
 }
 
-static char		**ft_free(char **str, int i)
+static char	**ft_free(char **str, int i)
 {
-	int idx;
+	int	idx;
 
 	idx = -1;
 	while (++idx < i)
@@ -60,10 +62,10 @@ static char		**ft_free(char **str, int i)
 	return (NULL);
 }
 
-static int		ft_find_c(char const *s, char c, int i)
+static int	ft_find_c(char const *s, char c, int i)
 {
-	int idx;
-	int cnt;
+	int	idx;
+	int	cnt;
 
 	idx = 0;
 	cnt = 0;
@@ -86,7 +88,7 @@ static int		ft_find_c(char const *s, char c, int i)
 	return (idx);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		cnt;
@@ -95,18 +97,20 @@ char			**ft_split(char const *s, char c)
 	i = -1;
 	if (!s)
 		return (NULL);
-	else if (!c || ft_strlen((char*)s) == 0)
+	else if (!c || ft_strlen((char *)s) == 0)
 	{
-		str = (char**)malloc(sizeof(char *));
+		str = (char **)malloc(sizeof(char *));
 		str[0] = 0;
 		return (str);
 	}
 	cnt = ft_count(s, c);
-	if (!(str = (char**)malloc(sizeof(char*) * (cnt + 1))))
+	str = (char **)malloc(sizeof(char *) * (cnt + 1));
+	if (!str)
 		return (NULL);
 	while (++i < cnt)
 	{
-		if (!(str[i] = ft_insert_str((char*)s, c, str[i], ft_find_c(s, c, i))))
+		str[i] = ft_insert_str((char *)s, c, str[i], ft_find_c(s, c, i));
+		if (!str[i])
 			return ((ft_free(str, i)));
 	}
 	str[i] = 0;

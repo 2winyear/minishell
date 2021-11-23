@@ -35,7 +35,7 @@ void	act_child(t_deque_node *node, t_info *info)
 		printf("Builtin Function set\n");
 	else
 	{
-		bin_path = make_bin_path(info->env, node->command[0]);
+		make_bin_path(info->env, node->command[0], &bin_path);
 		if (execve(bin_path, node->command, info->env) == -1)
 			printf("Child Error\n");
 	}

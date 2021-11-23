@@ -52,7 +52,6 @@ t_info	*init_info(char **env)
 	info = malloc(sizeof(t_info));
 	if (!info)
 		return (NULL);
-//	info->env = env;
 	info->env = env_dup(env, 0, NULL);
 	if (!info->env)
 		return (free_info(&info));
