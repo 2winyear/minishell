@@ -75,7 +75,10 @@ int     ft_strncmp(char *str1, char *str2, int n)
         if (str1[idx] != str2[idx])
             return (str1[idx] - str2[idx]);
     }
-    return (0);
+	if (idx == n)
+		return(0);
+	else
+		return(str1[idx] - str2[idx]);
 }
 
 char    *ft_strncpy(char *line, int n)
