@@ -22,8 +22,36 @@ int	check_run_builtin(char **command, t_info *info)
 		printf("cd\n");
 		return (0);
 	}
-	else
-		return (1);
+	return (1);
+}
+
+int		check_redirection(t_deque_node *node)
+{
+	if (node->prev_node->seperate[0] == '>')
+		return (0);
+	return (1);
+}
+
+void	redirection(t_deque_node *node, t_info *info)
+{
+	int		fd;
+	int		byte;
+	char	buf[BUF_SIZE];
+
+	fd = open(node->command[0], O_TRUNC | O_RDWR | O_CREAT, 00644);
+	if (fd == -1)
+	{
+		printf("Open error\n");
+		exit(1);
+	}
+	byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
+	while (byte > 0)
+	{
+		buf[byte] = '\0';
+		write(fd, buf, byte);
+		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
+	}
+	exit(0);
 }
 
 void	act_child(t_deque_node *node, t_info *info)
@@ -31,14 +59,25 @@ void	act_child(t_deque_node *node, t_info *info)
 	char	*bin_path;
 
 	operate_pipe(info, node, 1);
+	printf("out\n");
 	if (!check_run_builtin(node->command, info))
 		printf("Builtin Function set\n");
+	else if (!check_redirection(node))
+	{
+		printf("redirection\n");
+		redirection(node, info);
+	}
 	else
 	{
-		make_bin_path(info->env, node->command[0], &bin_path);
+		printf("builtin\n");
+		if (node->command[0][0] != '/')
+			make_bin_path(info->env, node->command[0], &bin_path);
+		else
+			bin_path = node->command[0];
 		if (execve(bin_path, node->command, info->env) == -1)
 			printf("Child Error\n");
 	}
+	printf("out????\n");
 	exit(1);
 }
 
