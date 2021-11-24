@@ -183,7 +183,7 @@ char	*ft_strjointri(char *str1, char *str2, char *str3)
 	int		k;
 
 	len = ft_strlen(str1) + ft_strlen(str2) + ft_strlen(str3);
-	str = malloc(sizeof(char) * len + 1);
+	str = (malloc(sizeof(char) * len + 1));
 	if (!str)
 		return (NULL);
 	i = -1;

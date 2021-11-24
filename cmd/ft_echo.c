@@ -32,18 +32,14 @@ void	ft_echo(char **command)
 	printf("\b");
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	char	*line;
-// 	char	**command;	
-// 	line = argv[1];
-// 	command = ft_split(line, ' ');
-// 	if (!ft_strncmp(command[0], "echo", ft_strlen(command[0])))
-// 		ft_echo(command);
-// 	return(0);
-// }
-
-/*
-0	Successful completion.
->0	An error occurred.
-*/
+int	main(int argc, char **argv)
+{
+	char	*line;
+	char	**command;	
+	line = argv[1];
+	line = "echo -n-n-n-n-n-n-n hi";
+	command = ft_split(line, ' ');
+	if (!ft_strncmp(command[0], "echo", ft_strlen(command[0])))
+		ft_echo(command);
+	return(0);
+}

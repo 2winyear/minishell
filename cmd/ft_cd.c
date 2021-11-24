@@ -4,6 +4,7 @@ int	move_dir(char *cmd, char **cur_path)
 {
 	DIR *dir;
 	struct dirent *ent;
+	char *temp;
 
 	dir = opendir(*cur_path);
 	if (!dir)
@@ -13,7 +14,9 @@ int	move_dir(char *cmd, char **cur_path)
 	{
 		if (!ft_strcmp(ent->d_name, cmd))
 		{
-			chdir(ft_strjointri(*cur_path, "/", cmd));
+			temp = ft_strjointri(*cur_path, "/", cmd);
+			chdir(temp);
+			free(temp);
 			*cur_path = getcwd(NULL, BUFSIZ);
 			closedir(dir);
 			return (1);
@@ -23,7 +26,7 @@ int	move_dir(char *cmd, char **cur_path)
 	return (0);
 }
 
-int		ft_cd(char **command, t_info *info)
+int	ft_cd(char **command, t_info *info)
 {
 	int		idx;
 	char	**split_cmd;
@@ -31,7 +34,7 @@ int		ft_cd(char **command, t_info *info)
 
 	idx = -1;
 	split_cmd = ft_split(command[1], '/');
-	if(command[1][0] == '/') // 절대 경로
+	if (command[1][0] == '/')
 		chdir("/");
 	cur_path = getcwd(NULL, BUFSIZ);
 	while (split_cmd[++idx])

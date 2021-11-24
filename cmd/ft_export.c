@@ -41,6 +41,8 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 	char	**edit_env;
 
 	edit_env = malloc(sizeof(char *) * (info->env_size));
+	if (!edit_env)
+		return (NULL);
 	i = -1;
 	while (info->env[++i])
 		edit_env[i] = ft_strdup(info->env[i]);
