@@ -11,16 +11,16 @@ void	ft_swap(char **env, int i, int j)
 
 void	sort_env(char **env, int start, int end)
 {
-	int pivot;
-	int i;
-	int j;
-	
+	int	pivot;
+	int	i;
+	int	j;
+
 	if (start >= end)
 		return ;
 	pivot = start;
 	i = pivot + 1;
 	j = end;
-	while(i <= j)
+	while (i <= j)
 	{
 		while (i <= end && strcmp(env[i], env[pivot]) <= 0)
 			i++;
@@ -35,16 +35,16 @@ void	sort_env(char **env, int start, int end)
 	sort_env(env, j + 1, end);
 }
 
-char **copy_or_resizing(char *command, t_info *info, int flag)
+char	**copy_or_resizing(char *command, t_info *info, int flag)
 {
-	int 	i;
-	char 	**edit_env;
+	int		i;
+	char	**edit_env;
 
-	edit_env = malloc(sizeof(char*) * (info->env_size));
+	edit_env = malloc(sizeof(char *) * (info->env_size));
 	i = -1;
 	while (info->env[++i])
 		edit_env[i] = ft_strdup(info->env[i]);
-	if (!flag) // flag == 1 -> resizing | flag == 0 -> copy
+	if (!flag)
 	{
 		edit_env[i] = 0;
 		return (edit_env);
@@ -54,7 +54,7 @@ char **copy_or_resizing(char *command, t_info *info, int flag)
 	return (edit_env);
 }
 
-void ft_export(char *command, t_info *info)
+void	ft_export(char *command, t_info *info)
 {
 	char	**sorted_env;
 	int		i;
@@ -77,11 +77,11 @@ void ft_export(char *command, t_info *info)
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	char *command = "TEST=test1";
-	t_info *info;
-	int i;
+	char	*command = "TEST=test1";
+	t_info	*info;
+	int		i;
 
 	i = 0;
 	info = init_info(env);

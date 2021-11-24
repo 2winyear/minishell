@@ -33,6 +33,9 @@ typedef struct s_infomation
 	t_deque		*cmd;
 	char		**env;
 	char		*pwd;
+	char		*curr_pwd;
+	char		**curr_pwd_split;
+	char		**command_split;
 	int			env_size;
 	int			is_pipe;
 	int			is_prev_pipe;
