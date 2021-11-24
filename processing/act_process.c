@@ -1,27 +1,31 @@
 #include "../include/minishell.h"
 
+void	run_single_cmd(t_info *info)
+{
+	if (check_run_builtin(info->cmd->header_node.next_node->command, info))
+		info->cmd->current_element_count -= 1;
+}
+
 int	check_run_builtin(char **command, t_info *info)
 {
 	if (!ft_strcmp(command[0], "export"))
-	{
-		printf("export\n");
-		return (1);
-	}
+		ft_export(command, info);
 	else if (!ft_strcmp(command[0], "exit"))
-	{
-		printf("exit\n");
-		return (1);
-	}
+		ft_exit(command);
 	else if (!ft_strcmp(command[0], "unset"))
 	{
-		printf("unset\n");
-		return (1);
+		if (!ft_unset(command, info))
+			return (0);
 	}
 	else if (!ft_strcmp(command[0], "cd"))
 	{
-		printf("cd\n");
-		return (1);
+		if (!ft_cd(command, info))
+			return (0);
 	}
+	else if (!ft_strcmp(command[0], "echo"))
+		ft_echo(command);
+	else
+		return (0);
 	return (1);
 }
 
@@ -30,8 +34,8 @@ void	act_child(t_deque_node *node, t_info *info)
 	char	*bin_path;
 
 	operate_pipe(info->cmd, node, 1);
-	if (!check_run_builtin(node->command, info))
-		printf("Builtin Function set\n");
+	if (check_run_builtin(node->command, info))
+		exit(0);
 	else if (check_run_redirection(node))
 		printf("Redirection Function set\n");
 	else

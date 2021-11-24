@@ -7,6 +7,8 @@ int		execute(t_info *info)
 	int				status;
 	char			*bin_path;
 
+	if (info->cmd->current_element_count == 1)
+		run_single_cmd(info);
 	while (info->cmd && info->cmd->current_element_count)
 	{
 		temp_node = pop_front_deque(info->cmd); // 커멘드 추출

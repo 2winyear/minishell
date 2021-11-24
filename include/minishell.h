@@ -32,7 +32,9 @@ typedef struct s_infomation
 {
 	t_deque		*cmd;
 	char		**env;
+	char		*oldpwd;
 	char		*pwd;
+	char		*home;
 	int			env_size;
 	int			is_pipe;
 	int			is_prev_pipe;
@@ -82,6 +84,7 @@ char			**find_bin_path(char **env);
 char			*make_bin_path(char **env, char *cmd, char **path);
 
 //////////////pipe_func////////////
+void			run_single_cmd(t_info *info);
 int				check_run_builtin(char **command, t_info *info);
 void			act_child(t_deque_node *node, t_info *info);
 void			operate_pipe(t_deque *cmd, t_deque_node *node, int flag);
@@ -92,6 +95,13 @@ void			overwrite_file(t_deque_node *node);
 void			append_file(t_deque_node *node);
 void			send_file(t_deque_node *node);
 void			send_doc(t_deque_node *node);
+
+//////////////cmd//////////////////
+int				ft_cd(char **command, t_info *info);
+void			ft_export(char **command, t_info *info);
+void			*ft_unset(char **command, t_info *info);
+void			ft_exit(char **command);
+void			ft_echo(char **command);
 
 //////////////minishell////////////
 int				execute(t_info *info);

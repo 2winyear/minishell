@@ -40,7 +40,7 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 	int		i;
 	char	**edit_env;
 
-	edit_env = malloc(sizeof(char *) * (info->env_size));
+	edit_env = malloc(sizeof(char *) * (info->env_size + flag + 1));
 	if (!edit_env)
 		return (NULL);
 	i = -1;
@@ -48,7 +48,7 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 		edit_env[i] = ft_strdup(info->env[i]);
 	if (!flag)
 	{
-		edit_env[i] = 0;
+		edit_env[i] = NULL;
 		return (edit_env);
 	}
 	edit_env[i] = ft_strdup(command);
@@ -56,60 +56,26 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 	return (edit_env);
 }
 
-void	ft_export(char *command, t_info *info)
+void	ft_export(char **command, t_info *info)
 {
 	char	**sorted_env;
 	int		i;
 
-	if (command == NULL)
+	if (command[1] == NULL)
 	{
-		sorted_env = copy_or_resizing(command, info, 0);
-		sort_env(sorted_env, 0, i - 1);
+		sorted_env = copy_or_resizing(command[1], info, 0);
+		sort_env(sorted_env, 0, info->env_size - 1);
 		i = -1;
 		while (info->env[++i])
 		{
 			printf("declare -x ");
 			printf("%s\n", sorted_env[i]);
 		}
+		free_matrix(&sorted_env);
 	}
 	else
 	{
 		info->env_size += 1;
-		info->env = copy_or_resizing(command, info, 1);
+		info->env = copy_or_resizing(command[1], info, 1);
 	}
 }
-
-int	main(int argc, char **argv, char **env)
-{
-	char	*command = "TEST=test1";
-	t_info	*info;
-	int		i;
-
-	i = 0;
-	info = init_info(env);
-	printf("env_size: %d\n", info->env_size);
-	ft_export(command, info);
-	printf("env_size: %d\n", info->env_size);
-	for (int i = 0; info->env[i]; i++)
-		printf("declare -x %s\n", info->env[i]);
-	return (0);
-}
-
-/*
-ft_export(char **env, char *command)
-{
-    if command == NULL
-        env를 정렬하고
-        while ()
-            print
-    else
-        env의 길이 세고 = size
-        env = resizing(&env, size);
-        끝에 command 추가
-        '\0' 추가
-}
-
-Exit Status
-0 Successful completion.
->0 An error occurred.
-*/

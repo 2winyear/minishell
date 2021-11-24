@@ -1,0 +1,13 @@
+a.out
+a.out.dSYM
+cmd
+errno_message
+execve_test.c
+include
+minishell.c
+parsing
+processing
+readline
+signal
+te3
+util

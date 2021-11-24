@@ -26,6 +26,35 @@ int	move_dir(char *cmd, char **cur_path)
 	return (0);
 }
 
+int	move_base(char **command, t_info *info)
+{
+	char	*tmp;
+
+	if (command[1][0] == '/')
+		chdir("/");
+	else if (command[1][0] == '~')
+	{
+		chdir(info->home);
+		return (1);
+	}
+	else if (command[1][0] == '-')
+	{
+		if (!info->oldpwd)
+		{
+			printf("minishell: cd: OLDPWD not set\n");
+			return (0);
+		}
+		tmp = ft_strjoin(info->home, info->oldpwd);
+		if (!tmp)
+			return (0);
+		chdir(tmp);
+		printf("%s\n", tmp);
+		free(tmp);
+		return (1);
+	}
+	return (1);
+}
+
 int	ft_cd(char **command, t_info *info)
 {
 	int		idx;
@@ -33,36 +62,21 @@ int	ft_cd(char **command, t_info *info)
 	char	*cur_path;
 
 	idx = -1;
+	if (!move_base(command, info))
+		return (0);
 	split_cmd = ft_split(command[1], '/');
-	if (command[1][0] == '/')
-		chdir("/");
 	cur_path = getcwd(NULL, BUFSIZ);
+	info->oldpwd = cur_path;
 	while (split_cmd[++idx])
 	{
-		printf("cur_path : %s\n", cur_path);
-		if (!move_dir(split_cmd[idx], &cur_path))
+		if (split_cmd[idx][0] != '~' && split_cmd[idx][0] != '-'\
+				&& !move_dir(split_cmd[idx], &cur_path))
 		{
 			free_matrix(&split_cmd);
 			return (0);
 		}
 	}
-	free(info->pwd);
+	info->pwd = NULL;
 	info->pwd = getcwd(NULL, BUFSIZ);
 	return (1);
-}
-
-int main(int argc, char **argv, char **env)
-{
-	char *command[] = {(char *)"cd", (char *)"test"};
-	char *command1[] = {(char *)"cd", (char *)".."};
-	char *command2[] = {(char *)"cd", (char *)"/Users/seungyel/Downloads/minishell 2/minishell/"};
-	t_info	*info;
-
-	info = init_info(env);
-	ft_cd(command, info);
-	printf("pwd : %s\n", info->pwd);
-	ft_cd(command1, info);
-	printf("pwd : %s\n", info->pwd);
-	ft_cd(command2, info);
-	printf("pwd : %s\n", info->pwd);
 }

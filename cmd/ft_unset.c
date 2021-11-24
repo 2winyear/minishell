@@ -12,7 +12,7 @@ int	find_cmd(char *env, char *command)
 	return (0);
 }
 
-char	**ft_unset(char *command, t_info *info)
+void	*ft_unset(char **command, t_info *info)
 {
 	char	**edit_env;
 	int		i;
@@ -25,7 +25,7 @@ char	**ft_unset(char *command, t_info *info)
 		return (NULL);
 	while (info->env[++i])
 	{
-		if (find_cmd(info->env[i], command))
+		if (find_cmd(info->env[i], command[1]))
 			info->env_size -= 1;
 		else
 		{
@@ -35,21 +35,6 @@ char	**ft_unset(char *command, t_info *info)
 		}
 	}
 	edit_env[j + 1] = free_matrix(&(info->env));
-	return (edit_env);
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	char	*command = "TEST1";
-	t_info	*info;
-	int		i;
-
-	i = 0;
-	info = init_info(env);
-	for (int i = 0; info->env[i]; i++)
-		printf("before : %s\n", info->env[i]);
-	info->env = ft_unset(command, info);
-	for (int i = 0; info->env[i]; i++)
-		printf("after : %s\n", info->env[i]);
-	return (0);
+	info->env = edit_env;
+	return (NULL);
 }

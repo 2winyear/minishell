@@ -57,8 +57,12 @@ t_info	*init_info(char **env)
 		return (free_info(&info));
 	idx = -1;
 	while (env[++idx])
-		;
+	{
+		if (!ft_strncmp(env[idx], "HOME", 4))
+			info->home = env[idx] + 5;
+	}
 	info->pwd = getcwd(NULL, BUF_SIZE);
+	info->oldpwd = NULL;
 	info->env_size = idx;
 	info->is_pipe = 0;
 	info->is_prev_pipe = 0;

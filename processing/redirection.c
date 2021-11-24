@@ -31,10 +31,10 @@ void	overwrite_file(t_deque_node *node)
 	while (byte > 0)
 	{
 		buf[byte] = '\0';
-		if (node->spt_type != 2 || node->spt_type != 4)
-			write(fd, buf, byte);
-		else
+		if (node->spt_type == 2 || node->spt_type == 4)
 			write(STDOUT_FILENO, buf, byte);
+		else
+			write(fd, buf, byte);
 		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
 	}
 	close(fd);
@@ -57,10 +57,10 @@ void	append_file(t_deque_node *node)
 	while (byte > 0)
 	{
 		buf[byte] = '\0';
-		if (node->spt_type != 2 || node->spt_type != 4)
-			write(fd, buf, byte);
-		else
+		if (node->spt_type == 2 || node->spt_type == 4)
 			write(STDOUT_FILENO, buf, byte);
+		else
+			write(fd, buf, byte);
 		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
 	}
 	close(fd);
@@ -99,9 +99,10 @@ void	send_doc(t_deque_node *node)
 	while (byte > 0)
 	{
 		buf[byte] = '\0';
-		write(STDOUT_FILENO, buf, byte);
-		if (!ft_strncmp(buf, node->command[0], ft_strlen(node->command[0])) && buf[ft_strlen(node->command[0])] == '\n')
+		if (!ft_strncmp(buf, node->command[0], ft_strlen(node->command[0])) &&\
+				buf[ft_strlen(node->command[0])] == '\n')
 			break;
+		write(STDOUT_FILENO, buf, byte);
 		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
 	}
 	if (byte == -1)
