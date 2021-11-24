@@ -38,8 +38,9 @@ void    inf_loop(t_info *info)
     {
 		printf("%s  ",info->pwd);
         line = read_line();		// 커멘드 라인 읽기
-		printf("INPUT : %s\n", line);
+		//printf("INPUT : %s\n", line);
 		info->cmd = parsing(line);	// tokenizing
+		//display_deque(info->cmd);
 		execute(info);
 	    delete_deque(&(info->cmd));
 		if (line)

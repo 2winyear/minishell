@@ -14,7 +14,7 @@ t_deque	*make_deque(void)
 	cmd->header_node.spt_type = -1;
 	cmd->tailer_node.spt_type = -1;
 	cmd->current_element_count = 0;
-	cmd->seperates = ft_split(";,|,>,<,>>,<<", ',');
+	cmd->seperates = ft_split(";,|,>>,<<,>,<", ',');
 	cmd->seperate_len = 5;
 	return (cmd);
 }

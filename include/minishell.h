@@ -47,6 +47,7 @@ int				is_seperate(char *line, char **seperate);
 int				save_command(t_deque *cmd, char *command, \
 		int spt_type, int len);
 int				is_double_quote(char word);
+void			change_command(t_deque *cmd);
 int				tokenizing(t_deque *cmd, char *command);
 t_deque			*parsing(char *command);
 
@@ -89,8 +90,11 @@ void			act_child(t_deque_node *node, t_info *info);
 void			operate_pipe(t_deque *cmd, t_deque_node *node, int flag);
 
 //////////////redirection_func/////
-int				check_redirection(t_deque_node *node, t_info *info);
-void			redirection(t_deque_node *node, t_info *info);
+int				check_run_redirection(t_deque_node *node);
+void			overwrite_file(t_deque_node *node);
+void			append_file(t_deque_node *node);
+void			send_file(t_deque_node *node);
+void			send_doc(t_deque_node *node);
 
 //////////////minishell////////////
 int				execute(t_info *info);

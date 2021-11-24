@@ -80,6 +80,25 @@ int	tokenizing(t_deque *cmd, char *command)
 	return (1);
 }
 
+void	change_command(t_deque *cmd)
+{
+	t_deque_node	*temp_node;
+	char			**temp;
+
+	temp_node = cmd->header_node.next_node;
+	while (temp_node != &(cmd->tailer_node))
+	{
+		if (temp_node->next_node != &(cmd->tailer_node) && \
+				(temp_node->spt_type == 3 || temp_node->spt_type == 5))
+		{
+			temp = temp_node->command;
+			temp_node->command = temp_node->next_node->command;
+			temp_node->next_node->command = temp;
+		}
+		temp_node = temp_node->next_node;
+	}
+}
+
 t_deque	*parsing(char *command)
 {
 	t_deque	*cmd;
@@ -95,5 +114,6 @@ t_deque	*parsing(char *command)
 		free(cmd);
 		return (NULL);
 	}
+	change_command(cmd);
 	return (cmd);
 }
