@@ -11,13 +11,15 @@ t_deque	*make_deque(void)
 	cmd->header_node.next_node = &(cmd->tailer_node);
 	cmd->tailer_node.prev_node = &(cmd->header_node);
 	cmd->tailer_node.next_node = NULL;
+	cmd->header_node.spt_type = -1;
+	cmd->tailer_node.spt_type = -1;
 	cmd->current_element_count = 0;
-	cmd->seperates = ft_split("|,<<,>>,<,>,;", ',');
+	cmd->seperates = ft_split(";,|,>>,<<,>,<", ',');
 	cmd->seperate_len = 5;
 	return (cmd);
 }
 
-t_deque_node	*make_deque_node(char **command, char *seperate)
+t_deque_node	*make_deque_node(char **command, char *seperate, int spt_type)
 {
 	t_deque_node	*new_node;
 
@@ -26,6 +28,7 @@ t_deque_node	*make_deque_node(char **command, char *seperate)
 		return (NULL);
 	new_node->command = command;
 	new_node->seperate = seperate;
+	new_node->spt_type = spt_type;
 	return (new_node);
 }
 
@@ -85,6 +88,8 @@ void	delete_deque(t_deque **cmd)
 	t_deque_node	*prev_node;
 	int				idx;
 
+	if (!(*cmd))
+		return ;
 	prev_node = &((*cmd)->tailer_node);
 	curr_node = prev_node->prev_node;
 	while (curr_node != &((*cmd)->header_node))

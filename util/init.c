@@ -57,16 +57,8 @@ t_info	*init_info(char **env)
 		return (free_info(&info));
 	idx = -1;
 	while (env[++idx])
-	{
-		if (!ft_strncmp(env[idx], "PWD=", 4))
-		{
-			info->pwd = ft_strdup(env[idx] + 4);
-			if (!info->pwd)
-				return (free_info(&info));
-		}
-		if (!info->env[idx])
-			return (free_info(&info));
-	}
+		;
+	info->pwd = getcwd(NULL, BUF_SIZE);
 	info->env_size = idx;
 	info->is_pipe = 0;
 	info->is_prev_pipe = 0;

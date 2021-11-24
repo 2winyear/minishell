@@ -30,10 +30,10 @@
 
 typedef struct s_infomation
 {
+	t_deque		*cmd;
 	char		**env;
 	char		*pwd;
 	int			env_size;
-	t_deque		*cmd;
 	int			is_pipe;
 	int			is_prev_pipe;
 }	t_info;
@@ -42,8 +42,9 @@ typedef struct s_infomation
 char			**ft_split(char const *s, char c);
 int				is_seperate(char *line, char **seperate);
 int				save_command(t_deque *cmd, char *command, \
-		char *seperate, int len);
+		int spt_type, int len);
 int				is_double_quote(char word);
+void			change_command(t_deque *cmd);
 int				tokenizing(t_deque *cmd, char *command);
 t_deque			*parsing(char *command);
 
@@ -83,8 +84,14 @@ char			*make_bin_path(char **env, char *cmd, char **path);
 //////////////pipe_func////////////
 int				check_run_builtin(char **command, t_info *info);
 void			act_child(t_deque_node *node, t_info *info);
-void			operate_pipe(t_info *info, t_deque_node *node, int flag);
-void			check_seperate(t_info *info, t_deque_node *temp_node);
+void			operate_pipe(t_deque *cmd, t_deque_node *node, int flag);
+
+//////////////redirection_func/////
+int				check_run_redirection(t_deque_node *node);
+void			overwrite_file(t_deque_node *node);
+void			append_file(t_deque_node *node);
+void			send_file(t_deque_node *node);
+void			send_doc(t_deque_node *node);
 
 //////////////minishell////////////
 int				execute(t_info *info);

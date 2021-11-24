@@ -7,18 +7,17 @@ int		execute(t_info *info)
 	int				status;
 	char			*bin_path;
 
-	while (info->cmd->current_element_count)
+	while (info->cmd && info->cmd->current_element_count)
 	{
 		temp_node = pop_front_deque(info->cmd); // 커멘드 추출
-		check_seperate(info, temp_node);
-		operate_pipe(info, temp_node, 0);
+		operate_pipe(info->cmd, temp_node, 0);
 		child_pid = fork(); // 자식 생성
 		if (child_pid == 0)
 			act_child(temp_node, info); // 자식행동개시
 		else if (child_pid > 0)
 		{
 			waitpid(child_pid, &status, 0); // 자식죽을때까지 기다림
-			operate_pipe(info, temp_node, 2);
+			operate_pipe(info->cmd, temp_node, 2);
 		}
 		else // ERROR
 		{
@@ -39,11 +38,13 @@ void    inf_loop(t_info *info)
     {
 		printf("%s  ",info->pwd);
         line = read_line();		// 커멘드 라인 읽기
-		printf("INPUT : %s\n", line);
+		//printf("INPUT : %s\n", line);
 		info->cmd = parsing(line);	// tokenizing
+		//display_deque(info->cmd);
 		execute(info);
 	    delete_deque(&(info->cmd));
-        free(line);         // line 사용 후 제거
+		if (line)
+			free(line);         // line 사용 후 제거
 		line = NULL;
 		//while(42) ;
     }
