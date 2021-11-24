@@ -33,3 +33,13 @@ void	ft_echo(char **command)
 	if (flag == 1)
 		printf("\n");
 }
+/*
+0. cd
+cd cmd   => cmd로 이동
+cd ~     => home으로 이동
+cd -     => oldpwd로 이동
+
+1. echo $PWD
+
+2. echo $? -> 종료상태
+*/
