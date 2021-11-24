@@ -25,46 +25,15 @@ int	check_run_builtin(char **command, t_info *info)
 	return (1);
 }
 
-int		check_redirection(t_deque_node *node)
-{
-	if (node->prev_node->seperate && !ft_strcmp(node->prev_node->seperate, ">"))
-		return (0);
-	return (1);
-}
-
-void	redirection(t_deque_node *node, t_info *info)
-{
-	int		fd;
-	int		byte;
-	char	buf[BUF_SIZE];
-
-	fd = open(node->command[0], O_TRUNC | O_RDWR | O_CREAT, 0644);
-	if (fd == -1)
-	{
-		printf("Open error\n");
-		exit(1);
-	}
-	byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
-	while (byte > 0)
-	{
-		buf[byte] = '\0';
-		printf("%s\n", buf);
-		write(fd, buf, byte);
-		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
-	}
-	close(fd);
-	exit(0);
-}
-
 void	act_child(t_deque_node *node, t_info *info)
 {
 	char	*bin_path;
 
-	operate_pipe(info, node, 1);
+	operate_pipe(info->cmd, node, 1);
 	if (!check_run_builtin(node->command, info))
 		printf("Builtin Function set\n");
-	else if (!check_redirection(node))
-		redirection(node, info);
+//	else if (!check_redirection(node))
+//		redirection(node, info);
 	else
 	{
 		if (node->command[0][0] != '/')
@@ -77,37 +46,26 @@ void	act_child(t_deque_node *node, t_info *info)
 	exit(1);
 }
 
-void	check_seperate(t_info *info, t_deque_node *temp_node)
+void	operate_pipe(t_deque *cmd, t_deque_node *node, int flag)
 {
-	info->is_prev_pipe = info->is_pipe;
-	if (temp_node->seperate && !ft_strcmp(temp_node->seperate, ";"))
-		info->is_pipe = 0;
-	else if (!temp_node->seperate)
-		info->is_pipe = 0;
-	else
-		info->is_pipe = 1;
-}
-
-void	operate_pipe(t_info *info, t_deque_node *node, int flag)
-{
-	if (flag == 0 && info->is_pipe)
+	if (flag == 0 && node->spt_type == 1)
 		pipe(node->pipe);
 	else if (flag == 1)
 	{
-		if (info->is_pipe)
+		if (node->spt_type == 1)
 			dup2(node->pipe[1], STDOUT_FILENO);
-		if (info->is_prev_pipe)
+		if (node->prev_node->spt_type == 1)
 			dup2(node->prev_node->pipe[0], STDIN_FILENO);
 	}
 	else if (flag == 2)
 	{
-		if (info->is_pipe)
+		if (node->spt_type == 1)
 		{
 			close(node->pipe[1]);
-			if (node->next_node == &(info->cmd->tailer_node))
+			if (node->next_node == &(cmd->tailer_node))
 				close(node->pipe[0]);
 		}
-		if (info->is_prev_pipe)
+		if (node->prev_node->spt_type == 1)
 			close(node->prev_node->pipe[0]);
 	}
 }

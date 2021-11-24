@@ -11,6 +11,7 @@ typedef struct s_deque_node
 	char					*seperate;
 	char					**command;
 	int						pipe[2];
+	int						spt_type;
 	struct s_deque_node		*prev_node;
 	struct s_deque_node		*next_node;
 }	t_deque_node;
@@ -25,7 +26,7 @@ typedef struct s_deque_type
 }	t_deque;
 
 t_deque						*make_deque(void);
-t_deque_node				*make_deque_node(char **command, char *seperate);
+t_deque_node				*make_deque_node(char **command, char *seperate, int spt_type);
 void						push_deque(t_deque *cmd, t_deque_node *element);
 t_deque_node				*pop_front_deque(t_deque *cmd);
 void						display_deque(t_deque *cmd);
