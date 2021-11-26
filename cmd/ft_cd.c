@@ -32,11 +32,8 @@ int	move_base(char **command, t_info *info)
 
 	if (command[1][0] == '/')
 		chdir("/");
-	else if (command[1][0] == '~') //cd ~kuhk    cmp 
-	{
+	else if (command[1][0] == '~') //cd ~kuhk    cmp
 		chdir(info->home);
-		return (1);
-	}
 	else if (command[1][0] == '-') //cd -kuhk    cmp 
 	{
 		if (!info->oldpwd)
@@ -47,8 +44,9 @@ int	move_base(char **command, t_info *info)
 		tmp = ft_strjoin(info->home, info->oldpwd);
 		if (!tmp)
 			return (0);
-		chdir(tmp); //움직였는데, info->pwd의 값이 안바뀜.
-		printf("%s\n", tmp);
+		if (chdir(tmp) == -1)
+			printf("chdir error\n");
+		printf("tmp : %s\n", tmp);
 		free(tmp);
 	}
 	return (1);
@@ -66,15 +64,15 @@ int	ft_cd(char **command, t_info *info)
 	split_cmd = ft_split(command[1], '/');
 	cur_path = getcwd(NULL, BUFSIZ);
 	info->oldpwd = info->pwd;
-	while (split_cmd[++idx])
+	while (split_cmd[++idx] && split_cmd[idx][0] != '~' && split_cmd[idx][0] != '-')
 	{
-		if ((split_cmd[idx][0] != '~' || split_cmd[idx][0] != '-')\
-				&& !move_dir(split_cmd[idx], &cur_path))
+		if (!move_dir(split_cmd[idx], &cur_path))
 		{
 			free_matrix(&split_cmd);
 			return (0);
 		}
 	}
+	free_matrix(&split_cmd);
 	info->pwd = NULL;
 	info->pwd = getcwd(NULL, BUFSIZ);
 	return (1);
