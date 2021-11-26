@@ -28,8 +28,6 @@ int	move_dir(char *cmd, char **cur_path)
 
 int	move_base(char **command, t_info *info)
 {
-	char	*tmp;
-
 	if (command[1][0] == '/')
 		chdir("/");
 	else if (command[1][0] == '~') //cd ~kuhk    cmp
@@ -41,13 +39,7 @@ int	move_base(char **command, t_info *info)
 			printf("minishell: cd: OLDPWD not set\n");
 			return (0);
 		}
-		tmp = ft_strjoin(info->home, info->oldpwd);
-		if (!tmp)
-			return (0);
-		if (chdir(tmp) == -1)
-			printf("chdir error\n");
-		printf("tmp : %s\n", tmp);
-		free(tmp);
+		chdir(info->oldpwd);
 	}
 	return (1);
 }
