@@ -20,6 +20,7 @@ int		execute(t_info *info)
 		{
 			waitpid(child_pid, &status, 0); // 자식죽을때까지 기다림
 			operate_pipe(info->cmd, temp_node, 2);
+			info->status = status;
 		}
 		else // ERROR
 		{

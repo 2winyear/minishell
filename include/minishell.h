@@ -38,6 +38,7 @@ typedef struct s_infomation
 	int			env_size;
 	int			is_pipe;
 	int			is_prev_pipe;
+	int			status;
 }	t_info;
 
 ///////////////parsing/////////////
@@ -101,7 +102,7 @@ int				ft_cd(char **command, t_info *info);
 void			ft_export(char **command, t_info *info);
 void			*ft_unset(char **command, t_info *info);
 void			ft_exit(char **command);
-void			ft_echo(char **command);
+void			ft_echo(char **command, t_info *info);
 
 //////////////minishell////////////
 int				execute(t_info *info);

@@ -23,7 +23,7 @@ int	check_run_builtin(char **command, t_info *info)
 			return (0);
 	}
 	else if (!ft_strcmp(command[0], "echo"))
-		ft_echo(command);
+		ft_echo(command, info);
 	else
 		return (0);
 	return (1);

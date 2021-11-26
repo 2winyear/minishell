@@ -66,5 +66,6 @@ t_info	*init_info(char **env)
 	info->env_size = idx;
 	info->is_pipe = 0;
 	info->is_prev_pipe = 0;
+	info->status = 0;
 	return (info);
 }
