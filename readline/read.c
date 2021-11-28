@@ -29,11 +29,17 @@ char	*read_line(t_info *info)
 	char	*prompt;
 
 	init_signal();
-	prompt = ft_strjoin(info->pwd, "  👍 ");
+	prompt = ft_strjoin(info->pwd, "  ▶ ");
 	if (!prompt)
 		exit(1);
+	rl_catch_signals = 0;
 	str = readline(prompt);
-	if (str)
+	if (!str)
+	{
+		printf("exit");
+		exit(4);
+	}
+	else if (str)
 	{
 		if (strlen(str))
 			add_history(str);
