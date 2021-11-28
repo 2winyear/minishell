@@ -13,31 +13,6 @@ int	is_seperate(char *line, char **seperate)
 	return (-1);
 }
 
-int	save_command(t_deque *cmd, char *command, int spt_type, int len)
-{
-	char			*temp;
-	char			**split_cmd;
-	char			*temp_spr;
-	t_deque_node	*new_node;
-
-	temp = ft_strndup(command, len);
-	if (!temp)
-		return (0);
-	split_cmd = ft_split(temp, ' ');
-	free(temp);
-	if (!split_cmd)
-		return (0);
-	if (spt_type != -1)
-		temp_spr = ft_strdup(cmd->seperates[spt_type]);
-	else
-		temp_spr = NULL;
-	new_node = make_deque_node(split_cmd, temp_spr, spt_type);
-	if (!new_node)
-		return (0);
-	push_deque(cmd, new_node);
-	return (1);
-}
-
 int	is_double_quote(char word)
 {
 	static int	flag;

@@ -1,20 +1,20 @@
 #include "../include/minishell.h"
 
-int     ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-    if ('0' <= c && c <= '9')
-        return (TRUE);
-    return (FALSE);
+	if ('0' <= c && c <= '9')
+		return (TRUE);
+	return (FALSE);
 }
 
-int     ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (str[++i])
-        ;
-    return (i);
+	i = -1;
+	while (str[++i])
+		;
+	return (i);
 }
 
 int     ft_atoi(char *str)
@@ -160,11 +160,11 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char*)s1;
+	str = (char *)s1;
 	len = ft_strlen(s1) + ft_strlen(s2);
 	i = -1;
 	j = -1;
-	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	while (s1[++i] != 0)
 		str[i] = s1[i];

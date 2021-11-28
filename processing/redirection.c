@@ -1,17 +1,15 @@
 #include "../include/minishell.h"
 
-
-int		check_run_redirection(t_deque_node *node)
+int	check_run_redirection(t_deque_node *node)
 {
-	if (node->prev_node->spt_type == 2) // >>
+	if (node->prev_node->spt_type == 2)
 		append_file(node);
-	else if (node->spt_type == 3) // <<
+	else if (node->spt_type == 3)
 		send_doc(node);
-	else if (node->prev_node->spt_type == 4) // >
+	else if (node->prev_node->spt_type == 4)
 		overwrite_file(node);
-	else if (node->spt_type == 5) // <
+	else if (node->spt_type == 5)
 		send_file(node);
-
 	return (0);
 }
 
@@ -99,9 +97,10 @@ void	send_doc(t_deque_node *node)
 	while (byte > 0)
 	{
 		buf[byte] = '\0';
-		if (!ft_strncmp(buf, node->command[0], ft_strlen(node->command[0])) &&\
-				buf[ft_strlen(node->command[0])] == '\n')
-			break;
+		if (!ft_strncmp (buf, node->command[0], \
+			ft_strlen (node->command[0])) && \ 
+			buf[ft_strlen(node->command[0])] == '\n')
+			break ;
 		write(STDOUT_FILENO, buf, byte);
 		byte = read(STDIN_FILENO, buf, BUF_SIZE - 1);
 	}

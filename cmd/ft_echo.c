@@ -15,16 +15,16 @@ int	is_flag(char *command)
 	return (0);
 }
 
-int find_dollar(char *command, t_info *info)
+int	find_dollar(char *command, t_info *info)
 {
-	int i;
-	int len;
-	char *temp;
+	int		i;
+	int		len;
+	char	*temp;
 
 	i = -1;
 	temp = ft_strnstr(command, "$", 1);
 	if (!temp)
-		return(0);
+		return (0);
 	if (temp[1] == '?')
 	{
 		printf("%d", info->status);
@@ -64,13 +64,3 @@ void	ft_echo(char **command, t_info *info)
 	if (flag == 1)
 		printf("\n");
 }
-/*
-0. cd
-cd cmd   => cmd로 이동
-cd ~     => home으로 이동
-cd -     => oldpwd로 이동
-
-1. echo $PWD
-
-2. echo $? -> 종료상태
-*/

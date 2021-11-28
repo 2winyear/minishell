@@ -26,7 +26,8 @@ typedef struct s_deque_type
 }	t_deque;
 
 t_deque						*make_deque(void);
-t_deque_node				*make_deque_node(char **command, char *seperate, int spt_type);
+t_deque_node				*make_deque_node(char **command, \
+							char *seperate, int spt_type);
 void						push_deque(t_deque *cmd, t_deque_node *element);
 t_deque_node				*pop_front_deque(t_deque *cmd);
 void						display_deque(t_deque *cmd);

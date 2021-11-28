@@ -2,9 +2,9 @@
 
 int	move_dir(char *cmd, char **cur_path)
 {
-	DIR *dir;
-	struct dirent *ent;
-	char *temp;
+	DIR				*dir;
+	struct dirent	*ent;
+	char			*temp;
 
 	dir = opendir(*cur_path);
 	if (!dir)
@@ -30,9 +30,9 @@ int	move_base(char **command, t_info *info)
 {
 	if (command[1][0] == '/')
 		chdir("/");
-	else if (command[1][0] == '~') //cd ~kuhk    cmp
+	else if (command[1][0] == '~')
 		chdir(info->home);
-	else if (command[1][0] == '-') //cd -kuhk    cmp 
+	else if (command[1][0] == '-')
 	{
 		if (!info->oldpwd)
 		{
@@ -56,7 +56,8 @@ int	ft_cd(char **command, t_info *info)
 	split_cmd = ft_split(command[1], '/');
 	cur_path = getcwd(NULL, BUFSIZ);
 	info->oldpwd = info->pwd;
-	while (split_cmd[++idx] && split_cmd[idx][0] != '~' && split_cmd[idx][0] != '-')
+	while (split_cmd[++idx] && split_cmd[idx][0] != '~' \
+	&& split_cmd[idx][0] != '-')
 	{
 		if (!move_dir(split_cmd[idx], &cur_path))
 		{
