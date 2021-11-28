@@ -32,7 +32,7 @@ char	*read_line(t_info *info)
 	free(prompt);
 	if (!str)
 	{
-		printf("exit");
+		printf("exit\n");
 		exit(4);
 	}
 	else if (str)
