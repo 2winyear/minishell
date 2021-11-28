@@ -2,11 +2,7 @@
 
 void	sig_handler(int signum)
 {
-	if (signum == SIGILL)
-	{
-		printf("SIGILL\n");
-	}
-	else if (signum == SIGINT)
+	if (signum == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
@@ -18,7 +14,6 @@ void	sig_handler(int signum)
 
 void	init_signal(void)
 {
-	signal(4, (void *)sig_handler);
 	signal(SIGINT, (void *)sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -34,6 +29,7 @@ char	*read_line(t_info *info)
 		exit(1);
 	rl_catch_signals = 0;
 	str = readline(prompt);
+	free(prompt);
 	if (!str)
 	{
 		printf("exit");
@@ -44,6 +40,5 @@ char	*read_line(t_info *info)
 		if (strlen(str))
 			add_history(str);
 	}
-	free(prompt);
 	return (str);
 }

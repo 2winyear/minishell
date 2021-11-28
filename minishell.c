@@ -56,8 +56,8 @@ int main(int argc, char **argv, char **env)
 {
 	t_info	*info;
 
-    display_logo(); // 시작 로고 프린트
 	info = init_info(env);
+    display_logo(info); // 시작 로고 프린트
 	if (!info)
 		return (FALSE);
     inf_loop(info);     // 무한루프 시작

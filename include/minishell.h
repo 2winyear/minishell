@@ -58,7 +58,7 @@ void			init_signal(void);
 char			*read_line(t_info *info);
 
 ///////////////init////////////////
-void			display_logo(void);
+void			display_logo(t_info *info);
 void			*free_info(t_info **info);
 t_info			*init_info(char **env);
 
