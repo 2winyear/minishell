@@ -6,7 +6,7 @@ void	display_logo(void)
 	int		bytes;
 	char	buf[BUF_SIZE];
 
-	fd = open("/Users/byeukim/goinfre/minishell/util/front_logo", O_RDONLY);
+	fd = open("/Users/byeukim/Desktop//minishell/util/front_logo", O_RDONLY);
 	if (fd < 0)
 		return ;
 	bytes = read(fd, buf, BUF_SIZE - 1);

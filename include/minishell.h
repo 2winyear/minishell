@@ -52,12 +52,10 @@ int				tokenizing(t_deque *cmd, char *command);
 t_deque			*parsing(char *command);
 
 ///////////////signal//////////////
+///////////////read////////////////
 void			sig_handler(int signum);
 void			init_signal(void);
-
-///////////////read////////////////
-int				my_bind_esc(int count, int key);
-char			*read_line(void);
+char			*read_line(t_info *info);
 
 ///////////////init////////////////
 void			display_logo(void);

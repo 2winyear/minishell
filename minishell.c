@@ -7,7 +7,7 @@ int		execute(t_info *info)
 	int				status;
 	char			*bin_path;
 
-	if (info->cmd->current_element_count == 1)
+	if (info->cmd && info->cmd->current_element_count == 1)
 		run_single_cmd(info);
 	while (info->cmd && info->cmd->current_element_count)
 	{
@@ -39,8 +39,7 @@ void    inf_loop(t_info *info)
     status = 42;				// 상태확인 인자
     while (status)
     {
-		printf("%s  ",info->pwd);
-        line = read_line();		// 커멘드 라인 읽기
+        line = read_line(info);		// 커멘드 라인 읽기
 		//printf("INPUT : %s\n", line);
 		info->cmd = parsing(line);	// tokenizing
 		//display_deque(info->cmd);
@@ -57,7 +56,6 @@ int main(int argc, char **argv, char **env)
 {
 	t_info	*info;
 
-    init_signal();  // 시그널 초기화
     display_logo(); // 시작 로고 프린트
 	info = init_info(env);
 	if (!info)
