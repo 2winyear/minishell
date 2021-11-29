@@ -38,6 +38,23 @@ void	delete_deque_node(t_deque_node **node)
 	*node = NULL;
 }
 
+void	delete_dq(char *command)
+{
+	int		i;
+	int		flag;
+
+	i = -1;
+	flag = 0;
+	while (command[++i])
+	{
+		if (command[i] == '"' && !(flag % 2))
+			flag += 1;
+		else if (command[i + 1] == '"' && flag % 2)
+			flag += 1;
+		command[i] = command[i + flag];
+	}
+}
+
 int	save_command(t_deque *cmd, char *command, int spt_type, int len)
 {
 	char			*temp;
@@ -45,6 +62,7 @@ int	save_command(t_deque *cmd, char *command, int spt_type, int len)
 	char			*temp_spr;
 	t_deque_node	*new_node;
 
+	delete_dq(command);
 	temp = ft_strndup(command, len);
 	if (!temp)
 		return (0);

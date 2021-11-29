@@ -6,13 +6,13 @@ int	is_flag(char *command)
 
 	idx = 0;
 	if (command[idx] != '-')
-		return (1);
+		return (0);
 	while (command[++idx])
 	{
 		if (command[idx] != 'n')
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	find_dollar(char *command, t_info *info)
@@ -25,7 +25,7 @@ int	find_dollar(char *command, t_info *info)
 	temp = ft_strnstr(command, "$", 1);
 	if (!temp)
 		return (0);
-	if (temp[1] == '?')
+	else if (temp[1] == '?')
 	{
 		printf("%d", info->status);
 		find_dollar(temp + 1, info);
@@ -54,13 +54,17 @@ void	ft_echo(char **command, t_info *info)
 	while (command[++idx])
 	{
 		if (!flag)
+		{
 			flag = is_flag(command[idx]);
+			if (flag)
+				continue ;
+		}
 		if (find_dollar(command[idx], info))
 			;
 		else
-			printf("%s", command[idx]);
+			printf("%s ", command[idx]);
 	}
 	printf("\b");
-	if (flag == 1)
+	if (flag != 1)
 		printf("\n");
 }

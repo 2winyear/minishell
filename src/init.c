@@ -9,7 +9,6 @@ void	display_logo(t_info *info)
 
 	path = ft_strjointri(info->pwd, "/src/", "front_logo");
 	fd = open(path, O_RDONLY);
-	printf("path : %s\n", path);
 	if (fd < 0)
 		return ;
 	bytes = read(fd, buf, BUF_SIZE - 1);
