@@ -1,4 +1,4 @@
-#include "include/minishell.h"
+#include "../include/minishell.h"
 
 int	execute_exit(void)
 {
@@ -11,7 +11,6 @@ int	execute(t_info *info)
 	t_deque_node	*temp_node;
 	pid_t			child_pid;
 	int				status;
-	char			*bin_path;
 
 	if (info->cmd && info->cmd->current_element_count == 1)
 		run_single_cmd(info);
@@ -56,6 +55,8 @@ int	main(int argc, char **argv, char **env)
 {
 	t_info	*info;
 
+	(void)argc;
+	(void)argv;
 	info = init_info(env);
 	display_logo(info);
 	if (!info)
