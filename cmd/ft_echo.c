@@ -37,7 +37,7 @@ int	find_dollar(char *command, t_info *info)
 	i = -1;
 	while (info->env[++i])
 	{
-		if (ft_strnstr(info->env[i], temp + 1, ft_strlen(temp + 1))\
+		if (ft_strnstr(info->env[i], temp + 1, ft_strlen(temp + 1)) \
 		 && info->env[i][ft_strlen(temp + 1)] == '=')
 			printf("%s", info->env[i] + ft_strlen(temp + 1) + 1);
 	}

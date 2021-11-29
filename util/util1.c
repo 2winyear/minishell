@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		ft_strcmp(char *str1, char *str2)
+int	ft_strcmp(char *str1, char *str2)
 {
 	int	idx;
 
@@ -16,50 +16,50 @@ int		ft_strcmp(char *str1, char *str2)
 	return (0);
 }
 
-int     ft_strncmp(char *str1, char *str2, int n)
+int	ft_strncmp(char *str1, char *str2, int n)
 {
-    int	idx;
+	int	idx;
 
-    idx = -1;
-    while (++idx < n && str1[idx] && str2[idx])
-    {
-        if (str1[idx] != str2[idx])
-            return (str1[idx] - str2[idx]);
-    }
+	idx = -1;
+	while (++idx < n && str1[idx] && str2[idx])
+	{
+		if (str1[idx] != str2[idx])
+			return (str1[idx] - str2[idx]);
+	}
 	if (idx == n)
-		return(0);
+		return (0);
 	else
-		return(str1[idx] - str2[idx]);
+		return (str1[idx] - str2[idx]);
 }
 
-char    *ft_strncpy(char *line, int n)
+char	*ft_strncpy(char *line, int n)
 {
-  char *str;
-  int i;
+	char	*str;
+	int		i;
 
-  str = malloc(sizeof(char) * n);
-  i = -1;
-  while (++i < n)
-    str[i] = line[i];
-  str[i] = '\0';
-  return (str);
+	str = malloc(sizeof(char) * n);
+	i = -1;
+	while (++i < n)
+		str[i] = line[i];
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strnstr(const char *b, const char *l, size_t len)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (*l == 0)
-		return ((char*)b);
+		return ((char *)b);
 	while (i < len && b[i])
 	{
 		j = 0;
 		while (*(b + i + j) == *(l + j) && i + j < len)
 		{
 			if (l[j + 1] == '\0')
-				return (char*)(b + i);
+				return ((char *)(b + i));
 			j++;
 		}
 		i++;
@@ -75,7 +75,7 @@ char	*ft_strdup(char *s1)
 	i = 0;
 	if (!s1)
 		return (NULL);
-	cpy = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	cpy = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!cpy)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -85,67 +85,4 @@ char	*ft_strdup(char *s1)
 	}
 	cpy[i] = '\0';
 	return (cpy);
-}
-
-char    *ft_strndup(char *s1, int len)
-{
-    int     idx;
-    char    *s2;
-
-    idx = -1;
-    s2 = malloc(len);
-    if (!s2)
-        return (NULL);
-    while (++idx < len)
-        s2[idx] = s1[idx];
-    s2[idx] = '\0';
-    return(s2);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*str;
-	size_t	len;
-	size_t	i;
-	size_t	j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)s1;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	i = -1;
-	j = -1;
-	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	while (s1[++i] != 0)
-		str[i] = s1[i];
-	while (s2[++j] != 0)
-		str[i++] = s2[j];
-	str[i] = 0;
-	return (str);
-}
-
-char	*ft_strjointri(char *str1, char *str2, char *str3)
-{
-	char	*str;
-	int		len;
-	int		i;
-	int		j;
-	int		k;
-
-	len = ft_strlen(str1) + ft_strlen(str2) + ft_strlen(str3);
-	str = (malloc(sizeof(char) * len + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	j = -1;
-	k = -1;
-	while (str1[++i])
-		str[i] = str1[i];
-	while (str2[++j])
-		str[i++] = str2[j];
-	while (str3[++k])
-		str[i++] = str3[k];
-	str[i] = '\0';
-	return (str);
 }

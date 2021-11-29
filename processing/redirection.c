@@ -98,7 +98,7 @@ void	send_doc(t_deque_node *node)
 	{
 		buf[byte] = '\0';
 		if (!ft_strncmp (buf, node->command[0], \
-			ft_strlen (node->command[0])) && \ 
+			ft_strlen (node->command[0])) && \
 			buf[ft_strlen(node->command[0])] == '\n')
 			break ;
 		write(STDOUT_FILENO, buf, byte);
