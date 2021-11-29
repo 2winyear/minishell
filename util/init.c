@@ -1,12 +1,16 @@
 #include "../include/minishell.h"
 
-void	display_logo(void)
+void	display_logo(t_info *info)
 {
 	int		fd;
 	int		bytes;
 	char	buf[BUF_SIZE];
+	char	*path;
 
-	fd = open("/Users/byeukim/goinfre/minishell/util/front_logo", O_RDONLY);
+	path = ft_strjointri(info->pwd, "/", "util/front_logo");
+	printf("%s\n", path);
+	fd = open(path, O_RDONLY);
+	free(path);
 	if (fd < 0)
 		return ;
 	bytes = read(fd, buf, BUF_SIZE - 1);

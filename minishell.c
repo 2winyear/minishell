@@ -13,7 +13,7 @@ int	execute(t_info *info)
 	int				status;
 	char			*bin_path;
 
-	if (info->cmd->current_element_count == 1)
+	if (info->cmd && info->cmd->current_element_count == 1)
 		run_single_cmd(info);
 	while (info->cmd && info->cmd->current_element_count)
 	{
@@ -42,8 +42,7 @@ void	inf_loop(t_info *info)
 	status = 42;
 	while (status)
 	{
-		printf("%s", info->pwd);
-		line = read_line();
+		line = read_line(info);
 		info->cmd = parsing(line);
 		execute(info);
 		delete_deque(&(info->cmd));
@@ -57,9 +56,8 @@ int	main(int argc, char **argv, char **env)
 {
 	t_info	*info;
 
-	init_signal();
-	display_logo();
 	info = init_info(env);
+	display_logo(info);
 	if (!info)
 		return (FALSE);
 	inf_loop(info);
