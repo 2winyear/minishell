@@ -7,13 +7,12 @@ void	display_logo(t_info *info)
 	char	buf[BUF_SIZE];
 	char	*path;
 
-	path = ft_strjointri(info->pwd, "/", "util/front_logo");
-	printf("%s\n", path);
+	path = ft_strjointri(info->pwd, "/", "front_logo");
 	fd = open(path, O_RDONLY);
-	free(path);
 	if (fd < 0)
 		return ;
 	bytes = read(fd, buf, BUF_SIZE - 1);
+	printf("sd\n");
 	buf[bytes] = '\0';
 	if (bytes == -1)
 	{
@@ -22,6 +21,7 @@ void	display_logo(t_info *info)
 	}
 	printf("%s", buf);
 	close(fd);
+	free(path);
 }
 
 void	*free_info(t_info **info)

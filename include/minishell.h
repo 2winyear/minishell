@@ -28,6 +28,9 @@
 # define ERROR -1
 # define BUF_SIZE 1025
 
+extern int rl_catch_signals;
+extern void rl_replace_line(const char *text, int n);
+
 typedef struct s_infomation
 {
 	t_deque		*cmd;

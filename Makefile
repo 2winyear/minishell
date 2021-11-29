@@ -1,7 +1,7 @@
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror -I include/
-READCFLAGS1 = -l readline -L /Users/$(USER)/.brew/opt/readline/lib
-READCFLAGS2 = -I/Users/$(USER)/.brew/opt/readline/include
+CFLAGS = -Wall -Wextra -Werror -I include
+READCFLAGS1 = -L $(HOME)/.brew/opt/readline/lib -lreadline
+READCFLAGS2 = -I~/.brew/opt/readline/include
 SRCS_NAME = minishell.c \
 			ft_cd.c \
 			ft_echo.c \
@@ -32,10 +32,10 @@ all: $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
-	gcc $(CFLAGS) -o $@ -c $< $(READCFLAGS1) $(READCFLAGS2)
+	gcc $(CFLAGS) $(READCFLAGS2) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	gcc $(CFLAGS) $(OBJS) -o $@ $(READCFLAGS2)
+	gcc $(CFLAGS) $(OBJS) -o $@ $(READCFLAGS2) $(READCFLAGS1)
 
 clean:
 	rm -rf ./objs
