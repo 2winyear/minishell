@@ -7,12 +7,12 @@ void	display_logo(t_info *info)
 	char	buf[BUF_SIZE];
 	char	*path;
 
-	path = ft_strjointri(info->pwd, "/", "front_logo");
+	path = ft_strjointri(info->pwd, "/src/", "front_logo");
 	fd = open(path, O_RDONLY);
+	printf("path : %s\n", path);
 	if (fd < 0)
 		return ;
 	bytes = read(fd, buf, BUF_SIZE - 1);
-	printf("sd\n");
 	buf[bytes] = '\0';
 	if (bytes == -1)
 	{
