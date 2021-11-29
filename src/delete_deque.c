@@ -38,32 +38,34 @@ void	delete_deque_node(t_deque_node **node)
 	*node = NULL;
 }
 
-void	delete_dq(char *command)
+char	*set_command(t_info *info, char *command, int len)
 {
 	int		i;
-	int		flag;
+	char	*cmd;
 
 	i = -1;
-	flag = 0;
+	cmd = malloc()
 	while (command[++i])
 	{
-		if (command[i] == '"' && !(flag % 2))
-			flag += 1;
-		else if (command[i + 1] == '"' && flag % 2)
-			flag += 1;
-		command[i] = command[i + flag];
+		if (command[i] == '"')
+			continue ;
+		else if (command[i] == '$')
+		{
+
+		}
+		else
+			cmd[i]
 	}
 }
 
-int	save_command(t_deque *cmd, char *command, int spt_type, int len)
+int	save_command(t_info *info, char *command, int spt_type, int len)
 {
 	char			*temp;
 	char			**split_cmd;
 	char			*temp_spr;
 	t_deque_node	*new_node;
 
-	delete_dq(command);
-	temp = ft_strndup(command, len);
+	temp = set_command(info, command, len);
 	if (!temp)
 		return (0);
 	split_cmd = ft_split(temp, ' ');
@@ -71,12 +73,12 @@ int	save_command(t_deque *cmd, char *command, int spt_type, int len)
 	if (!split_cmd)
 		return (0);
 	if (spt_type != -1)
-		temp_spr = ft_strdup(cmd->seperates[spt_type]);
+		temp_spr = ft_strdup(info->cmd->seperates[spt_type]);
 	else
 		temp_spr = NULL;
 	new_node = make_deque_node(split_cmd, temp_spr, spt_type);
 	if (!new_node)
 		return (0);
-	push_deque(cmd, new_node);
+	push_deque(info->cmd, new_node);
 	return (1);
 }

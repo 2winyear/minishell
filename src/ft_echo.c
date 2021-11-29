@@ -44,6 +44,19 @@ int	find_dollar(char *command, t_info *info)
 	return (1);
 }
 
+void	print_echo(char *command)
+{
+	int	idx;
+
+	idx = -1;
+	while (command[++idx])
+	{
+		if (command[idx] != '\'')
+			printf("%c", command[idx]);
+	}
+	printf(" ");
+}
+
 void	ft_echo(char **command, t_info *info)
 {
 	int	idx;
@@ -62,7 +75,7 @@ void	ft_echo(char **command, t_info *info)
 		if (find_dollar(command[idx], info))
 			;
 		else
-			printf("%s ", command[idx]);
+			print_echo(command[idx]);
 	}
 	printf("\b");
 	if (flag != 1)

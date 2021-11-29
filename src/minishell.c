@@ -42,7 +42,8 @@ void	inf_loop(t_info *info)
 	while (status)
 	{
 		line = read_line(info);
-		info->cmd = parsing(line);
+		if (!parsing(line, info))
+			exit(1);
 		execute(info);
 		delete_deque(&(info->cmd));
 		if (line)

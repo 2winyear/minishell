@@ -1,5 +1,5 @@
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror -I include
+CFLAGS = -g3 -Wall -Wextra -Werror -I include
 READCFLAGS1 = -L $(HOME)/.brew/opt/readline/lib -lreadline
 READCFLAGS2 = -I~/.brew/opt/readline/include
 SRCS_NAME = minishell.c \

@@ -26,7 +26,7 @@ int	is_double_quote(char word)
 	return (0);
 }
 
-int	tokenizing(t_deque *cmd, char *command)
+int	tokenizing(t_info *info, char *command)
 {
 	int		start;
 	int		end;
@@ -38,19 +38,19 @@ int	tokenizing(t_deque *cmd, char *command)
 	{
 		if (is_double_quote(command[end]))
 		{
-			sep_idx = is_seperate(command + end, cmd->seperates);
+			sep_idx = is_seperate(command + end, info->cmd->seperates);
 			if (sep_idx != -1)
 			{
-				if (!save_command(cmd, command + start, \
+				if (!save_command(info, command + start, \
 						sep_idx, end - start))
 					return (0);
-				start = end + ft_strlen(cmd->seperates[sep_idx]);
+				start = end + ft_strlen(info->cmd->seperates[sep_idx]);
 				end = start - 1;
 			}
 		}
 	}
 	if (end - start != 0 && \
-			!save_command(cmd, command + start, -1, end - start))
+			!save_command(info->cmd, command + start, -1, end - start))
 		return (0);
 	return (1);
 }
@@ -74,21 +74,19 @@ void	change_command(t_deque *cmd)
 	}
 }
 
-t_deque	*parsing(char *command)
+int	*parsing(char *command, t_info *info)
 {
-	t_deque	*cmd;
-
 	if (!command)
 		return (NULL);
-	cmd = make_deque();
-	if (!cmd)
+	info->cmd = make_deque();
+	if (!info->cmd)
 		return (NULL);
-	if (!tokenizing(cmd, command))
+	if (!tokenizing(info, command))
 	{
 		printf("tokenizing ERROR\n");
-		free(cmd);
+		delete_deque(&(info->cmd));
 		return (NULL);
 	}
-	change_command(cmd);
+	change_command(info->cmd);
 	return (cmd);
 }

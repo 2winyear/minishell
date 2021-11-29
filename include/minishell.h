@@ -47,12 +47,13 @@ typedef struct s_infomation
 ///////////////parsing/////////////
 char			**ft_split(char const *s, char c);
 int				is_seperate(char *line, char **seperate);
-int				save_command(t_deque *cmd, char *command, \
+char			*set_command(t_info *info, char *command, int len);
+int				save_command(t_info *info, char *command, \
 		int spt_type, int len);
 int				is_double_quote(char word);
 void			change_command(t_deque *cmd);
-int				tokenizing(t_deque *cmd, char *command);
-t_deque			*parsing(char *command);
+int				tokenizing(t_info *info, char *command);
+int				*parsing(char *command, t_info *info);
 
 ///////////////signal//////////////
 ///////////////read////////////////
@@ -101,7 +102,7 @@ void			send_doc(t_deque_node *node);
 //////////////cmd//////////////////
 int				ft_cd(char **command, t_info *info);
 void			ft_export(char **command, t_info *info);
-void			*ft_unset(char **command, t_info *info);
+int				ft_unset(char **command, t_info *info);
 void			ft_exit(char **command);
 void			ft_echo(char **command, t_info *info);
 

@@ -12,7 +12,7 @@ int	find_cmd(char *env, char *command)
 	return (0);
 }
 
-void	*ft_unset(char **command, t_info *info)
+int	ft_unset(char **command, t_info *info)
 {
 	char	**edit_env;
 	int		i;
@@ -22,7 +22,7 @@ void	*ft_unset(char **command, t_info *info)
 	j = -1;
 	edit_env = malloc(sizeof(char *) * info->env_size + 1);
 	if (!edit_env)
-		return (NULL);
+		return (0);
 	while (info->env[++i])
 	{
 		if (find_cmd(info->env[i], command[1]))
@@ -30,11 +30,11 @@ void	*ft_unset(char **command, t_info *info)
 		else
 		{
 			edit_env[++j] = ft_strdup(info->env[i]);
-			if (!edit_env[j])
-				return (free_matrix(&edit_env));
+			if (!edit_env[j] && !free_matrix(&edit_env))
+				return (0);
 		}
 	}
 	edit_env[j + 1] = free_matrix(&(info->env));
 	info->env = edit_env;
-	return (NULL);
+	return (1);
 }
