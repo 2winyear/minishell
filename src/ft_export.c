@@ -56,6 +56,28 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 	return (edit_env);
 }
 
+int find_command_in_env(t_info *info, char *command)
+{
+	int i;
+
+	/*
+	env에
+	TEST=test
+	TEST=2
+	가 있을 때 TEST부분만(=이 나오기 전까지) env랑 비교하고 싶다.
+	*/
+	i = -1;
+	while (info->env[++i])
+	{
+		if (ft_strnstr(info->env[i], command, ft_strlen(command)))
+		{
+			info->env[i] = command;
+			return(1);
+		}
+	}
+	return(0);
+}
+
 void	ft_export(char **command, t_info *info)
 {
 	char	**sorted_env;
@@ -75,7 +97,11 @@ void	ft_export(char **command, t_info *info)
 	}
 	else
 	{
-		info->env_size += 1;
-		info->env = copy_or_resizing(command[1], info, 1);
+		if (find_command_in_env(info, command[1]) == 0)
+		{
+			//맞는게 없다.
+			info->env_size += 1;
+			info->env = copy_or_resizing(command[1], info, 1);
+		}
 	}
 }
