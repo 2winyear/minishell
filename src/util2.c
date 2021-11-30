@@ -6,7 +6,7 @@ char	*ft_strndup(char *s1, int len)
 	char	*s2;
 
 	idx = -1;
-	s2 = malloc(len);
+	s2 = malloc(len + 1);
 	if (!s2)
 		return (NULL);
 	while (++idx < len)

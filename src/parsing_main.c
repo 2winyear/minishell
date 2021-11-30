@@ -50,7 +50,7 @@ int	tokenizing(t_info *info, char *command)
 		}
 	}
 	if (end - start != 0 && \
-			!save_command(info->cmd, command + start, -1, end - start))
+			!save_command(info, command + start, -1, end - start))
 		return (0);
 	return (1);
 }
@@ -74,19 +74,19 @@ void	change_command(t_deque *cmd)
 	}
 }
 
-int	*parsing(char *command, t_info *info)
+int	parsing(char *command, t_info *info)
 {
 	if (!command)
-		return (NULL);
+		return (0);
 	info->cmd = make_deque();
 	if (!info->cmd)
-		return (NULL);
+		return (0);
 	if (!tokenizing(info, command))
 	{
 		printf("tokenizing ERROR\n");
 		delete_deque(&(info->cmd));
-		return (NULL);
+		return (0);
 	}
 	change_command(info->cmd);
-	return (cmd);
+	return (1);
 }

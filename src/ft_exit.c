@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void	ft_exit(char **command)
+void	ft_exit(char **command, t_info *info)
 {
 	int	exit_num;
 	int	idx;
@@ -23,6 +23,7 @@ void	ft_exit(char **command)
 			}
 		}
 	}
-	printf("%s\n", strerror(exit_num));
+	info->status = exit_num;
+	printf("exit\n");
 	exit(exit_num);
 }

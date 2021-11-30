@@ -82,3 +82,29 @@ char	*make_bin_path(char **env, char *cmd, char **path)
 	}
 	return (free_matrix(&bin_path));
 }
+
+char	*find_env_value(t_info *info, char *key)
+{
+	char	*env_element;
+	int		idx;
+	
+	idx = -1;
+	if (!key)
+		return (NULL);
+	if (key[0] == '?' && key[1] == '\0')
+	{
+		env_element = ft_itoa(info->status);
+		if (!env_element)
+			return (NULL);
+		return (env_element);
+	}
+	while (info->env[++idx])
+		if (!ft_strncmp(info->env[idx], key, ft_strlen(key)))
+			break ;
+	if (!info->env[idx])
+		return (NULL);
+	env_element = ft_strdup(info->env[idx] + ft_strlen(key) + 1);
+	if (!env_element)
+		return (NULL);
+	return (env_element);
+}

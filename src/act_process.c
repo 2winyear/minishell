@@ -13,7 +13,7 @@ int	check_run_builtin(char **command, t_info *info)
 	if (!ft_strcmp(command[0], "export"))
 		ft_export(command, info);
 	else if (!ft_strcmp(command[0], "exit"))
-		ft_exit(command);
+		ft_exit(command, info);
 	else if (!ft_strcmp(command[0], "unset"))
 	{
 		if (!ft_unset(command, info))
@@ -25,7 +25,7 @@ int	check_run_builtin(char **command, t_info *info)
 			return (0);
 	}
 	else if (!ft_strcmp(command[0], "echo"))
-		ft_echo(command, info);
+		ft_echo(command);
 	else
 		return (0);
 	return (1);

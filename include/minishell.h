@@ -44,16 +44,23 @@ typedef struct s_infomation
 	int			status;
 }	t_info;
 
+///////////////command_util///////////
+char			*find_conv_dallor(char *command, t_info *info);
+char			*div_dup(char *command, t_info *info);
+char			**set_split_cmd(t_info *info, char *command);
+int				save_command(t_info *info, char *command, \
+		int spt_type, int len);
+int				space_count(char *command);
+char			*add_word(char **result, char word);
+char			*conv_dallor(char *result, char *command, int len, t_info *info);
+
 ///////////////parsing/////////////
 char			**ft_split(char const *s, char c);
 int				is_seperate(char *line, char **seperate);
-char			*set_command(t_info *info, char *command, int len);
-int				save_command(t_info *info, char *command, \
-		int spt_type, int len);
 int				is_double_quote(char word);
 void			change_command(t_deque *cmd);
 int				tokenizing(t_info *info, char *command);
-int				*parsing(char *command, t_info *info);
+int				parsing(char *command, t_info *info);
 
 ///////////////signal//////////////
 ///////////////read////////////////
@@ -79,12 +86,14 @@ char			*ft_strdup(char *s1);
 char			*ft_strndup(char *s1, int len);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjointri(char *str1, char *str2, char *str3);
+char			*ft_itoa(int n);
 
 //////////////env_util/////////////
 void			*free_matrix(char ***env);
 char			**env_dup(char **env, int flag, char *app_str);
 char			**find_bin_path(char **env);
 char			*make_bin_path(char **env, char *cmd, char **path);
+char			*find_env_value(t_info *info, char *key);
 
 //////////////pipe_func////////////
 void			run_single_cmd(t_info *info);
@@ -103,8 +112,8 @@ void			send_doc(t_deque_node *node);
 int				ft_cd(char **command, t_info *info);
 void			ft_export(char **command, t_info *info);
 int				ft_unset(char **command, t_info *info);
-void			ft_exit(char **command);
-void			ft_echo(char **command, t_info *info);
+void			ft_exit(char **command, t_info *info);
+void			ft_echo(char **command);
 
 //////////////minishell////////////
 int				execute(t_info *info);

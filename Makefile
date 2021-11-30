@@ -12,6 +12,8 @@ SRCS_NAME = minishell.c \
 			edit_deque.c \
 			read.c \
 			ft_split.c \
+			command_util1.c \
+			command_util2.c \
 			parsing_main.c \
 			act_process.c \
 			redirection.c \
@@ -19,7 +21,8 @@ SRCS_NAME = minishell.c \
 			init.c \
 			util.c \
 			util1.c \
-			util2.c
+			util2.c \
+			util3.c
 
 SRCS_DIR = ./src
 
