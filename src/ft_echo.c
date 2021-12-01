@@ -1,31 +1,18 @@
 #include "../include/minishell.h"
 
-int	is_flag(char *command)
+int	check_flag(char *command)
 {
 	int	idx;
 
 	idx = 0;
-	if (command[idx] != '-')
-		return (0);
+	if (command[0] != '-')
+		return (1);
 	while (command[++idx])
 	{
 		if (command[idx] != 'n')
-			return (0);
+			return (1);
 	}
-	return (1);
-}
-
-void	print_echo(char *command)
-{
-	int	idx;
-
-	idx = -1;
-	while (command[++idx])
-	{
-		if (command[idx] != '\'')
-			printf("%c", command[idx]);
-	}
-	printf(" ");
+	return (0);
 }
 
 void	ft_echo(char **command)
@@ -35,16 +22,13 @@ void	ft_echo(char **command)
 
 	idx = 0;
 	flag = 0;
-	while (command[++idx])
-	{
-		if (!flag)
-		{
-			flag = is_flag(command[idx]);
-			if (flag)
-				continue ;
-		}
-		print_echo(command[idx]);
+	while (check_flag(command[idx + 1]) == 0)
+	{	
+		flag = 1;
+		idx += 1;
 	}
+	while (command[++idx])
+		printf("%s ", command[idx]);
 	printf("\b");
 	if (flag != 1)
 		printf("\n");

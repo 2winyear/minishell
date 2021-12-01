@@ -66,6 +66,7 @@ int find_command_in_env(t_info *info, char *command)
 	TEST=2
 	가 있을 때 TEST부분만(=이 나오기 전까지) env랑 비교하고 싶다.
 	*/
+
 	i = -1;
 	while (info->env[++i])
 	{
