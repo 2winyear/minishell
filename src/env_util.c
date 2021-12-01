@@ -99,8 +99,10 @@ char	*find_env_value(t_info *info, char *key)
 		return (env_element);
 	}
 	while (info->env[++idx])
-		if (!ft_strncmp(info->env[idx], key, ft_strlen(key)))
+	{
+		if (!ft_strncmp(info->env[idx], key, ft_strchr(info->env[idx], '=')))
 			break ;
+	}
 	if (!info->env[idx])
 		return (NULL);
 	env_element = ft_strdup(info->env[idx] + ft_strlen(key) + 1);

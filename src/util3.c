@@ -49,3 +49,15 @@ char			*ft_itoa(int n)
 	str[cnt - 1] = 0;
 	return (ft_insert_nbr(nbr, cnt, str, flag));
 }
+
+int			ft_strchr(char *s, int c)
+{
+	int	idx;
+
+	idx = -1;
+	while (s[++idx] && s[idx] != c)
+		;
+	if (!s[idx])
+		return (-1);
+	return (idx);
+}

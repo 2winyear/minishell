@@ -53,6 +53,7 @@ int				save_command(t_info *info, char *command, \
 int				space_count(char *command);
 char			*add_word(char **result, char word);
 char			*conv_dallor(char *result, char *command, int len, t_info *info);
+int				check_save_word(char word, char **result);
 
 ///////////////parsing/////////////
 char			**ft_split(char const *s, char c);
@@ -87,6 +88,7 @@ char			*ft_strndup(char *s1, int len);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjointri(char *str1, char *str2, char *str3);
 char			*ft_itoa(int n);
+int				ft_strchr(char *s, int c);
 
 //////////////env_util/////////////
 void			*free_matrix(char ***env);

@@ -77,3 +77,24 @@ char	*conv_dallor(char *result, char *command, int len, t_info *info)
 	free(env_element);
 	return (result);
 }
+
+int	check_save_word(char word, char **result)
+{
+	static int	flag;
+	
+	if (word == '"')
+		return (1);
+	else if (!flag && word == '\'')
+		flag = 1;
+	else if (flag && word == '\'')
+		flag = 0;
+	else if (!flar &d word == '$')
+		return (0);
+	else
+	{
+		*result = add_word(result, word);
+		if (!(*result))
+			return (0);
+	}
+	return (1);
+}
