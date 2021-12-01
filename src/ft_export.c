@@ -6,7 +6,7 @@
 /*   By: seungyel <seungyel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:45:29 by seungyel          #+#    #+#             */
-/*   Updated: 2021/12/01 15:45:31 by seungyel         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:27:02 by seungyel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,17 @@ int	find_command_in_env(t_info *info, char *command)
 	int		i;
 	char	*temp;
 
-	printf("command %s\n", command);
 	i = -1;
 	temp = malloc(sizeof(char) * ft_strlen(command));
 	while (command[++i] != '=')
 		temp[i] = command[i];
 	temp[i] = '\0';
-	printf("temp: %s\n", temp);
 	free(temp);
 	i = -1;
 	while (info->env[++i])
 	{
 		if (ft_strnstr(info->env[i], temp, ft_strlen(temp)))
 		{
-			printf("in\n");
 			info->env[i] = ft_strdup(command);
 			return (1);
 		}
@@ -115,7 +112,6 @@ void	ft_export(char **command, t_info *info)
 	{
 		if (find_command_in_env(info, command[1]) == 0)
 		{
-			printf("no\n");
 			info->env_size += 1;
 			info->env = copy_or_resizing(command[1], info, 1);
 		}
