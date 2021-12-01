@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seungyel <seungyel@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/01 15:45:29 by seungyel          #+#    #+#             */
+/*   Updated: 2021/12/01 15:45:31 by seungyel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 void	ft_swap(char **env, int i, int j)
@@ -56,27 +68,30 @@ char	**copy_or_resizing(char *command, t_info *info, int flag)
 	return (edit_env);
 }
 
-int find_command_in_env(t_info *info, char *command)
+int	find_command_in_env(t_info *info, char *command)
 {
-	int i;
+	int		i;
+	char	*temp;
 
-	/*
-	env에
-	TEST=test
-	TEST=2
-	가 있을 때 TEST부분만(=이 나오기 전까지) env랑 비교하고 싶다.
-	*/
-
+	printf("command %s\n", command);
+	i = -1;
+	temp = malloc(sizeof(char) * ft_strlen(command));
+	while (command[++i] != '=')
+		temp[i] = command[i];
+	temp[i] = '\0';
+	printf("temp: %s\n", temp);
+	free(temp);
 	i = -1;
 	while (info->env[++i])
 	{
-		if (ft_strnstr(info->env[i], command, ft_strlen(command)))
+		if (ft_strnstr(info->env[i], temp, ft_strlen(temp)))
 		{
-			info->env[i] = command;
-			return(1);
+			printf("in\n");
+			info->env[i] = ft_strdup(command);
+			return (1);
 		}
 	}
-	return(0);
+	return (0);
 }
 
 void	ft_export(char **command, t_info *info)
@@ -100,7 +115,7 @@ void	ft_export(char **command, t_info *info)
 	{
 		if (find_command_in_env(info, command[1]) == 0)
 		{
-			//맞는게 없다.
+			printf("no\n");
 			info->env_size += 1;
 			info->env = copy_or_resizing(command[1], info, 1);
 		}
