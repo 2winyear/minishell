@@ -83,7 +83,7 @@ int	parsing(char *command, t_info *info)
 		return (0);
 	if (!tokenizing(info, command))
 	{
-		printf("tokenizing ERROR\n");
+		printf("tokenizing error\n");
 		delete_deque(&(info->cmd));
 		return (0);
 	}

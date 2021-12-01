@@ -2,6 +2,8 @@
 
 void	sig_handler(int signum)
 {
+	extern void	rl_replace_line(const char *text, int n);
+
 	if (signum == SIGINT)
 	{
 		printf("\n");
@@ -20,8 +22,9 @@ void	init_signal(void)
 
 char	*read_line(t_info *info)
 {
-	char	*str;
-	char	*prompt;
+	char		*str;
+	char		*prompt;
+	extern int	rl_catch_signals;
 
 	init_signal();
 	prompt = ft_strjoin(info->pwd, "  ▶ ");

@@ -23,7 +23,7 @@ int	space_count(char *command)
 		}
 		else if (flag)
 			continue ;
-		if (command[idx] == ' ')
+		if (command[idx] == ' ' && (idx > 0 && command[idx - 1] != ' '))
 			count += 1;
 	}
 	return (count);

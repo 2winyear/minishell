@@ -28,9 +28,6 @@
 # define ERROR -1
 # define BUF_SIZE 1025
 
-extern int	rl_catch_signals;
-extern void rl_replace_line(const char *text, int n);
-
 typedef struct s_infomation
 {
 	t_deque		*cmd;
@@ -47,6 +44,7 @@ typedef struct s_infomation
 ///////////////command_util///////////
 char			*find_conv_dallor(char *command, t_info *info);
 char			*div_dup(char *command, t_info *info);
+int				check_flag_space(char *command, int *start, int *prev_start);
 char			**set_split_cmd(t_info *info, char *command);
 int				save_command(t_info *info, char *command, \
 		int spt_type, int len);

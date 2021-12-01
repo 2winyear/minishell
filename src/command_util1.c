@@ -56,6 +56,30 @@ char	*div_dup(char *command, t_info *info)
 	return (find_conv_dallor(temp, info));
 }
 
+int	check_flag_space(char *command, int *start, int *prev_start)
+{
+	static int	flag;
+
+	if (!flag && command[*start] == '"')
+		flag = 1;
+	else if (flag && command[*start] == '"')
+		flag = 0;
+	else if (flag)
+		;
+	else if (command[*start] == ' ')
+	{
+		if (*start > 0 && command[*start - 1] != ' ')
+			return (1);
+		while (command[*start] && command[*start] == ' ')
+		{
+			(*start)++;
+			(*prev_start)++;
+		}
+		return (0);
+	}
+	return (0);
+}
+
 char	**set_split_cmd(t_info *info, char *command)
 {
 	char	**result;
@@ -66,20 +90,19 @@ char	**set_split_cmd(t_info *info, char *command)
 	start = -1;
 	prev_start = 0;
 	idx = -1;
-	result = malloc(sizeof(char *) * (space_count(command) + 2));
+	result = malloc(sizeof(char *) * (space_count(command) + 1));
 	if (!result)
 		return (NULL);
 	while (command[++start])
 	{
-		if (command[start] == ' ' || !command[start + 1])
+		if (check_flag_space(command, &start, &prev_start) \
+				|| !command[start + 1])
 		{
 			result[++idx] = div_dup(command + prev_start, info);
 			if (!result[idx])
 				return (free_matrix(&result));
 			prev_start = start + 1;
 		}
-		else if (command[start] == '"')
-			continue ;
 	}
 	result[idx + 1] = NULL;
 	return (result);
