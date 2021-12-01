@@ -5,13 +5,15 @@ char	*find_conv_dallor(char *command, t_info *info)
 	char	*result;
 	int		start;
 	int		len;
+	int		flag;
 
 	start = -1;
 	result = NULL;
+	flag = 0;
 	while (command[++start])
 	{
 		len = 0;
-		if (command[start] == '$')
+		if (!flag && command[start] == '$')
 		{
 			while (command[++start] && (command[start] != ' ' && command[start] != '"'))
 				len += 1;
@@ -20,6 +22,10 @@ char	*find_conv_dallor(char *command, t_info *info)
 		}
 		else if (command[start] == '"')
 			continue ;
+		else if (!flag && command[start] == '\'')
+			flag = 1;
+		else if (flag && command[start] == '\'')
+			flag = 0;
 		else
 		{
 			result = add_word(&result, command[start]);

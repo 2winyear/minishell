@@ -62,22 +62,18 @@ char	*conv_dallor(char *result, char *command, int len, t_info *info)
 
 	key = ft_strndup(command, len);
 	env_element = find_env_value(info, key);
-	if (env_element)
-	{
-		if (!result)
-			result = env_element;
-		else
-		{
-			temp = ft_strjoin(result, env_element);
-			free(result);
-			result = temp;
-			if (env_element)
-				free(env_element);
-		}
-	}
+	if (!env_element)
+		env_element = ft_strdup("");
+	if (!result)
+		result = ft_strdup(env_element);
 	else
-		result = ft_strdup("");
+	{
+		temp = ft_strjoin(result, env_element);
+		free(result);
+		result = temp;
+	}
 	if (key)
 		free(key);
+	free(env_element);
 	return (result);
 }
