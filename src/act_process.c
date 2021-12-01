@@ -47,9 +47,12 @@ void	act_child(t_deque_node *node, t_info *info)
 		else
 			bin_path = node->command[0];
 		if (execve(bin_path, node->command, info->env) == -1)
+		{
 			printf("minishell %s: command not found\n", node->command[0]);
+			exit(1);
+		}
 	}
-	exit(1);
+	exit(0);
 }
 
 void	operate_pipe(t_deque *cmd, t_deque_node *node, int flag)

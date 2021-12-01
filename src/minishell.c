@@ -25,7 +25,7 @@ int	execute(t_info *info)
 		{
 			waitpid(child_pid, &status, 0);
 			operate_pipe(info->cmd, temp_node, 2);
-			info->status = status;
+			info->status = WEXITSTATUS(status);
 		}
 		else
 			execute_exit();
