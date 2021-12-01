@@ -31,6 +31,7 @@ char	*read_line(t_info *info)
 	if (!prompt)
 		exit(1);
 	rl_catch_signals = 0;
+	printf("\033[500D");
 	str = readline(prompt);
 	free(prompt);
 	if (!str)
