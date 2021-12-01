@@ -28,7 +28,7 @@
 # define ERROR -1
 # define BUF_SIZE 1025
 
-extern int rl_catch_signals;
+extern int	rl_catch_signals;
 extern void rl_replace_line(const char *text, int n);
 
 typedef struct s_infomation
@@ -52,7 +52,8 @@ int				save_command(t_info *info, char *command, \
 		int spt_type, int len);
 int				space_count(char *command);
 char			*add_word(char **result, char word);
-char			*conv_dallor(char *result, char *command, int len, t_info *info);
+char			*conv_dallor(char *result, char *command, int len \
+		, t_info *info);
 int				check_save_word(char word, char **result);
 
 ///////////////parsing/////////////
