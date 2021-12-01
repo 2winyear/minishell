@@ -15,7 +15,8 @@ char	*find_conv_dallor(char *command, t_info *info)
 			continue ;
 		else if (command[start] == '$')
 		{
-			while (command[++start] && (command[start] != ' ' && command[start] != '"'))
+			while (command[++start] && (command[start] != ' ' \
+						&& command[start] != '"'))
 				len += 1;
 			result = conv_dallor(result, command + start - len, len, info);
 			start -= 1;
@@ -42,9 +43,7 @@ char	*div_dup(char *command, t_info *info)
 			flag = 1;
 		else if (flag && command[idx] == '"')
 			flag = 0;
-		else if (flag)
-			;
-		else if (command[idx] == ' ')
+		else if (!flag && command[idx] == ' ')
 		{
 			temp = ft_strndup(command, idx);
 			break ;

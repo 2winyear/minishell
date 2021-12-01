@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int		space_count(char *command)
+int	space_count(char *command)
 {
 	int		idx;
 	int		count;
@@ -81,14 +81,14 @@ char	*conv_dallor(char *result, char *command, int len, t_info *info)
 int	check_save_word(char word, char **result)
 {
 	static int	flag;
-	
+
 	if (word == '"')
 		return (1);
 	else if (!flag && word == '\'')
 		flag = 1;
 	else if (flag && word == '\'')
 		flag = 0;
-	else if (!flar &d word == '$')
+	else if (!flag && word == '$')
 		return (0);
 	else
 	{

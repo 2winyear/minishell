@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-static int		ft_count_nbr(unsigned long nbr, int cnt)
+static int	ft_count_nbr(unsigned long nbr, int cnt)
 {
 	cnt++;
 	if (nbr == 0)
@@ -13,7 +13,7 @@ static int		ft_count_nbr(unsigned long nbr, int cnt)
 	return (cnt);
 }
 
-static char		*ft_insert_nbr(unsigned long nbr, int cnt, char *str, int flag)
+static char	*ft_insert_nbr(unsigned long nbr, int cnt, char *str, int flag)
 {
 	while (--cnt)
 	{
@@ -26,7 +26,7 @@ static char		*ft_insert_nbr(unsigned long nbr, int cnt, char *str, int flag)
 	return (str);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char			*str;
 	int				cnt;
@@ -44,13 +44,14 @@ char			*ft_itoa(int n)
 	else
 		nbr = (unsigned long)n;
 	cnt = ft_count_nbr(nbr, cnt);
-	if (!(str = (char*)malloc(sizeof(char) * cnt)))
+	str = (char *)malloc(sizeof(char) * cnt);
+	if (!str)
 		return (NULL);
 	str[cnt - 1] = 0;
 	return (ft_insert_nbr(nbr, cnt, str, flag));
 }
 
-int			ft_strchr(char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	int	idx;
 

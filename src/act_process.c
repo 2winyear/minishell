@@ -9,7 +9,7 @@ void	run_single_cmd(t_info *info)
 int	check_run_builtin(char **command, t_info *info)
 {
 	if (!command[0])
-		return(1);
+		return (1);
 	if (!ft_strcmp(command[0], "export"))
 		ft_export(command, info);
 	else if (!ft_strcmp(command[0], "exit"))

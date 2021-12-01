@@ -87,7 +87,7 @@ char	*find_env_value(t_info *info, char *key)
 {
 	char	*env_element;
 	int		idx;
-	
+
 	idx = -1;
 	if (!key)
 		return (NULL);
