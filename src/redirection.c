@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byeukim <byeukim@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/02 12:15:53 by byeukim           #+#    #+#             */
+/*   Updated: 2021/12/02 12:15:53 by byeukim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	check_run_redirection(t_deque_node *node)
@@ -10,7 +22,7 @@ int	check_run_redirection(t_deque_node *node)
 		overwrite_file(node);
 	else if (node->spt_type == 5)
 		send_file(node);
-	return (1);
+	return (0);
 }
 
 void	overwrite_file(t_deque_node *node)

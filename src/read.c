@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byeukim <byeukim@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/02 12:15:49 by byeukim           #+#    #+#             */
+/*   Updated: 2021/12/02 12:29:41 by byeukim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 void	sig_handler(int signum)
@@ -25,13 +37,15 @@ char	*read_line(t_info *info)
 	char		*str;
 	char		*prompt;
 	extern int	rl_catch_signals;
+	extern int	rl_point;
 
 	init_signal();
 	prompt = ft_strjoin(info->pwd, "  ▶ ");
 	if (!prompt)
 		exit(1);
 	rl_catch_signals = 0;
-	printf("\033[500D");
+	if (!rl_point)
+		printf("\033[500D");
 	str = readline(prompt);
 	free(prompt);
 	if (!str)

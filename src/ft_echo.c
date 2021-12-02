@@ -6,7 +6,7 @@
 /*   By: seungyel <seungyel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:45:52 by seungyel          #+#    #+#             */
-/*   Updated: 2021/12/01 15:45:53 by seungyel         ###   ########.fr       */
+/*   Updated: 2021/12/02 12:19:08 by byeukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_flag(char *command)
 	int	idx;
 
 	idx = 0;
-	if (command[0] != '-')
+	if (command[idx] != '-')
 		return (1);
 	while (command[++idx])
 	{
@@ -34,7 +34,7 @@ void	ft_echo(char **command)
 
 	idx = 0;
 	flag = 0;
-	while (check_flag(command[idx + 1]) == 0)
+	while (!check_flag(command[idx + 1]))
 	{	
 		flag = 1;
 		idx += 1;
