@@ -10,7 +10,7 @@ int	check_run_redirection(t_deque_node *node)
 		overwrite_file(node);
 	else if (node->spt_type == 5)
 		send_file(node);
-	return (0);
+	return (1);
 }
 
 void	overwrite_file(t_deque_node *node)

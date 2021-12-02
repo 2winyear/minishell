@@ -39,7 +39,7 @@ void	act_child(t_deque_node *node, t_info *info)
 	if (check_run_builtin(node->command, info))
 		exit(0);
 	else if (check_run_redirection(node))
-		printf("Redirection Function set\n");
+		exit(0);
 	else
 	{
 		if (node->command[0][0] != '/')
@@ -52,7 +52,6 @@ void	act_child(t_deque_node *node, t_info *info)
 			exit(1);
 		}
 	}
-	exit(0);
 }
 
 void	operate_pipe(t_deque *cmd, t_deque_node *node, int flag)

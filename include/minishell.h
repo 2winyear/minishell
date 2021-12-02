@@ -36,8 +36,6 @@ typedef struct s_infomation
 	char		*pwd;
 	char		*home;
 	int			env_size;
-	int			is_pipe;
-	int			is_prev_pipe;
 	int			status;
 }	t_info;
 
@@ -117,7 +115,7 @@ void			ft_exit(char **command, t_info *info);
 void			ft_echo(char **command);
 
 //////////////minishell////////////
-int				execute(t_info *info);
+void			execute(t_info *info);
 void			inf_loop(t_info *info);
 
 #endif

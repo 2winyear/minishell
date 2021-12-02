@@ -6,7 +6,7 @@ int	execute_exit(void)
 	exit(1);
 }
 
-int	execute(t_info *info)
+void	execute(t_info *info)
 {
 	t_deque_node	*temp_node;
 	pid_t			child_pid;
@@ -30,16 +30,13 @@ int	execute(t_info *info)
 		else
 			execute_exit();
 	}
-	return (1);
 }
 
 void	inf_loop(t_info *info)
 {
 	char	*line;
-	int		status;
 
-	status = 42;
-	while (status)
+	while (42)
 	{
 		line = read_line(info);
 		if (!parsing(line, info))
@@ -59,9 +56,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	info = init_info(env);
-	display_logo(info);
 	if (!info)
-		return (FALSE);
+		return (1);
+	display_logo(info);
 	inf_loop(info);
-	return (TRUE);
+	return (0);
 }
